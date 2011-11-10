@@ -21,11 +21,12 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type AssocRefFichier::Méthode ( liste des paramètres )
+void AssocRefFichier::ajouterLigne ( int numLigne )
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+	lignes.push_back(numLigne);
+} //----- Fin de ajouterLigne
 
 
 //------------------------------------------------- Surcharge d'opérateurs

@@ -14,11 +14,13 @@ using namespace std;
 #include <vector>
 
 //------------------------------------------------------ Include personnel
+#include "References.h"
 
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
 const int ERREUR_ARGS = 1;
 const int ERREUR_FICHIER_MOTS_CLES = 2;
+
 //------------------------------------------------------------------ Types
 
 //---------------------------------------------------- Variables statiques
@@ -96,7 +98,7 @@ int main ( int argc, char ** argv )
 		else {
 			optionsTerminees = true;
 
-			if (fichierMotsClesAttendu = true) {
+			if (fichierMotsClesAttendu) {
 				nomFichierMotsCles = argv[i];
 				fichierMotsClesAttendu = false;
 			}
@@ -106,10 +108,8 @@ int main ( int argc, char ** argv )
 		}
 	}
 
-	//
-	if (exclureMotsCles){
-
-	}
+	References ref;
+	ref.TraiterFichiers(nomFichierMotsCles, nomsFichiers);
 
 	return 0;
 } //----- fin de main

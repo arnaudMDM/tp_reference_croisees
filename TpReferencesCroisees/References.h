@@ -18,6 +18,7 @@
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
+enum Erreur {ERREUR_LECTURE};
 
 //------------------------------------------------------------------------ 
 // Rôle de la classe <References>
@@ -31,7 +32,7 @@ class References
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	// type Méthode ( liste des paramètres );
+	void TraiterFichiers(char * nomFichierMotsCles, vector<char *> nomFichiers);
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -71,8 +72,8 @@ protected:
 	//----------------------------------------------------- Méthodes protégées
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
 	void lireFichier ( char * nomFichier );
-	void traiterMot ( string &mot );
-	void ajouterReference ( string &mot );
+	void traiterMot ( string &mot, int numLigne );
+	void ajouterReference ( string &mot, int numLigne );
 
 	//----------------------------------------------------- Attributs protégés
 	map<string, AssocRefFichier> references;

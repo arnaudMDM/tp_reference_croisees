@@ -6,9 +6,7 @@
  *************************************************************************/
 
 //---------- Réalisation de la classe <References> (fichier References.cpp) -------
-
 //---------------------------------------------------------------- INCLUDE
-
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
@@ -19,10 +17,10 @@ using namespace std;
 #include <string>
 #include <algorithm>
 #include <utility>
-#include "AssocRefFichier.h"
 
 //------------------------------------------------------ Include personnel
 #include "References.h"
+#include "AssocRefFichier.h"
 
 //------------------------------------------------------------- Constantes
 const int TAILLE_MAX_MOT = 50;
@@ -30,16 +28,40 @@ const char DELIM[] = {
         ' ', '\t', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(', ')',
         '!', '-', '+', '/', '*', '&', '|', '%', '$', '#' };
 const char TAILLE_DELIM = 24;
+const string MOTS_CLES_C[] = {
+        "asm", "auto", "bool", "break", "case", "catch", "char", "class",
+        "const", "const_char", "continue", "default", "delete", "do", "double",
+        "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false",
+        "float", "for", "friend", "goto", "if", "inline", "int", "long",
+        "mutable", "namespace", "new", "operator", "private", "protected",
+        "public", "register", "reinterpret_cast", "return", "short", "signed",
+        "sizeof", "static", "static_cast", "struct", "switch", "template",
+        "this", "throw", "true", "try", "typedef", "typeid", "typename",
+        "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
+        "while" };
+const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type References::Méthode ( liste des paramètres )
+void References::TraiterFichiers ( char * nomFichierMotsCles,
+        vector<char *> nomFichiers )
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
-
+{
+	try
+	{
+		if ( nomFichierMotsCles != NULL )
+		{
+			lireFichierMotsCles ( nomFichierMotsCles );
+			return;
+		}
+	}
+	catch (Erreur &e)
+	{
+	} // bloc vide
+	motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C + TAILLE_MOTS_CLES_C );
+} //----- TraiterFichiers
 
 //------------------------------------------------- Surcharge d'opérateurs
 /*
@@ -60,7 +82,6 @@ References::References ( const References & unReferences )
 #endif
 } //----- Fin de References (constructeur de copie)
 
-
 References::References ( )
 // Algorithme :
 //
@@ -69,7 +90,6 @@ References::References ( )
 	cout << "Appel au constructeur de <References>" << endl;
 #endif
 } //----- Fin de References
-
 
 References::~References ( )
 // Algorithme :
@@ -81,7 +101,6 @@ References::~References ( )
 	delete motsCles;
 } //----- Fin de ~References
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
@@ -89,11 +108,15 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 // Algorithme :
 //
 {
-	char * str = new char[TAILLE_MAX_MOT + 1];
-	vector<string> * motsCles = new vector<string> ;
+	char * str = new char[TAILLE_MAX_MOT + 1];vector<string> * motsCles = new vector<string> ;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
+
+	if (lecture.fail()) {
+		Erreur e = ERREUR_LECTURE;
+		throw e;
+	}
 
 	while (!lecture.eof ( ))
 	{
@@ -102,11 +125,13 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		if ( strchr ( str, ' ' ) != NULL || strchr ( str, ',' ) != NULL
 		        || strchr ( str, ';' ) != NULL )
 		{
-			throw 15;
+			throw 1;
 		}
 
 		motsCles->push_back ( str );
 	}
+
+	lecture.close();
 
 	return motsCles;
 } //----- Fin de lireFichierMotsCles
@@ -138,13 +163,13 @@ void References::lireFichier ( char * nomFichier )
 				{
 					carAttendu1 = '\n';
 					numLigne++;
-					lecture.get();
+					lecture.get ( );
 				}
 				else if ( c2 == '*' )
 				{
 					carAttendu1 = '*';
 					carAttendu2 = '/';
-					lecture.get();
+					lecture.get ( );
 				}
 			}
 			else if ( c == '"' )
@@ -155,28 +180,33 @@ void References::lireFichier ( char * nomFichier )
 			{
 				carAttendu1 = '\'';
 			}
-			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c ) == DELIM
-			        + TAILLE_DELIM )
+			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c )
+			        == DELIM + TAILLE_DELIM )
 			{
-				mot << c;
+				mot.push_back ( c );
 			}
 			else
 			{
-				traiterMot ( mot );
+				traiterMot ( mot, numLigne );
 				mot = "";
 			}
 		}
 		else
 		{
-			if (c == carAttendu1) {
-				if (carAttendu2 == -1) {
+			if ( c == carAttendu1 )
+			{
+				if ( carAttendu2 == -1 )
+				{
 					carAttendu1 = -1;
 				}
-				else {
-					if (lecture.peek() == carAttendu2) {
+				else
+				{
+					if ( lecture.peek ( ) == carAttendu2 )
+					{
 						carAttendu1 = -1;
 						carAttendu2 = -1;
-						if (lecture.get() == '\n') {
+						if ( lecture.get ( ) == '\n' )
+						{
 							numLigne++;
 						}
 					}
@@ -184,34 +214,36 @@ void References::lireFichier ( char * nomFichier )
 			}
 		}
 
-		if (c == '\n') {
+		if ( c == '\n' )
+		{
 			numLigne++;
 		}
 	}
 } //----- Fin de lireFichier
 
-void References::traiterMot ( string &mot )
+void References::traiterMot ( string &mot, int numLigne )
 {
 	if ( find ( motsCles->begin ( ), motsCles->end ( ), mot )
 	        != motsCles->end ( ) )
 	{
 		if ( !exclureMotsCles )
 		{
-			//ajouter aux references
+			ajouterReference ( mot, numLigne );
 		}
 	}
 	else if ( exclureMotsCles )
 	{
-		//ajouter aux references
+		ajouterReference ( mot, numLigne );
 	}
 }
 
-void References::ajouterReference ( string &mot )
+void References::ajouterReference ( string &mot, int numLigne )
 {
-	AssocRefFichier * assoc = new AssocRefFichier ();
+	AssocRefFichier * assoc = new AssocRefFichier ( );
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
-	paire = references.insert ( pair<string, AssocRefFichier>(mot, *(assoc)));
+	paire = references.insert (
+	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
-	it->second->ajouterLigne(numLigne);
+	it->second.ajouterLigne ( numLigne );
 }
