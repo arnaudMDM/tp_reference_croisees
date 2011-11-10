@@ -12,6 +12,8 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <vector>
+#include <string>
 
 //------------------------------------------------------ Include personnel
 #include "AssocRefFichier.h"
@@ -21,13 +23,22 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void AssocRefFichier::ajouterLigne ( int numLigne )
-// Algorithme :
-//
+void AssocRefFichier::AjouterLigne ( int numLigne )
+// Algorithme : trivial
 {
 	lignes.push_back(numLigne);
 } //----- Fin de ajouterLigne
 
+string AssocRefFichier::AfficherLignes()
+// Algorithme : parcourt du vector
+{
+	string str = "";
+	for (vector<int>::iterator it = lignes.begin(); it < lignes.end(); it++) {
+		str += *it + " ";
+	}
+
+	return str;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 /*

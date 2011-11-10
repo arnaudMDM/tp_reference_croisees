@@ -45,23 +45,38 @@ const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------- Méthodes publiques
 void References::TraiterFichiers ( char * nomFichierMotsCles,
-        vector<char *> nomFichiers )
+        vector<char *> &nomsFichiers )
 // Algorithme :
 //
 {
-	try
+	if ( nomFichierMotsCles != NULL )
 	{
-		if ( nomFichierMotsCles != NULL )
-		{
-			lireFichierMotsCles ( nomFichierMotsCles );
-			return;
-		}
+		lireFichierMotsCles ( nomFichierMotsCles );
 	}
-	catch (Erreur &e)
+	else
 	{
-	} // bloc vide
-	motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C + TAILLE_MOTS_CLES_C );
-} //----- TraiterFichiers
+		motsCles = new vector<string> ( MOTS_CLES_C,
+		        MOTS_CLES_C + TAILLE_MOTS_CLES_C );
+	}
+
+	for ( vector<char *>::iterator it = nomsFichiers.begin ( );
+	        it < nomsFichiers.end ( ); it++ )
+	        {
+		lireFichier ( *it );
+	}
+} //----- Fin de TraiterFichiers
+
+string References::AfficherResultat ( )
+// Algorithme :
+//
+{
+	string str = "";
+	for (map<string, AssocRefFichier>::iterator it = references.begin(); it != references.end(); it++) {
+		str += it->first + " : " + it->second.AfficherLignes() + '\n';
+	}
+
+	return str;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 /*
@@ -108,13 +123,15 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 // Algorithme :
 //
 {
-	char * str = new char[TAILLE_MAX_MOT + 1];vector<string> * motsCles = new vector<string> ;
+	char str[TAILLE_MAX_MOT + 1];vector<string> * motsCles = new vector<string>;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
 
-	if (lecture.fail()) {
+	if (lecture.fail())
+	{
 		Erreur e = ERREUR_LECTURE;
+		delete motsCles;
 		throw e;
 	}
 
@@ -123,9 +140,11 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		lecture.getline ( str, TAILLE_MAX_MOT );
 
 		if ( strchr ( str, ' ' ) != NULL || strchr ( str, ',' ) != NULL
-		        || strchr ( str, ';' ) != NULL )
+				|| strchr ( str, ';' ) != NULL )
 		{
-			throw 1;
+			Erreur e = ERREUR_LECTURE;
+			delete motsCles;
+			throw e;
 		}
 
 		motsCles->push_back ( str );
@@ -245,5 +264,5 @@ void References::ajouterReference ( string &mot, int numLigne )
 	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
-	it->second.ajouterLigne ( numLigne );
+	it->second.AjouterLigne ( numLigne );
 }

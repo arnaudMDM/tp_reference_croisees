@@ -28,7 +28,13 @@ class AssocRefFichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	void ajouterLigne ( int numLigne );
+	void AjouterLigne ( int numLigne );
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	string AfficherLignes ( );
 	// Mode d'emploi :
 	//
 	// Contrat :

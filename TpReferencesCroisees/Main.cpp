@@ -109,7 +109,14 @@ int main ( int argc, char ** argv )
 	}
 
 	References ref;
-	ref.TraiterFichiers(nomFichierMotsCles, nomsFichiers);
+	try {
+		ref.TraiterFichiers(nomFichierMotsCles, nomsFichiers);
+	}
+	catch (Erreur &e) {
+		cerr << "Erreur" << endl;
+	}
+
+	cout << ref.AfficherResultat() << endl;
 
 	return 0;
 } //----- fin de main

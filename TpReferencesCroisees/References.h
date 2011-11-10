@@ -18,7 +18,10 @@
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
-enum Erreur {ERREUR_LECTURE};
+enum Erreur
+{
+	ERREUR_LECTURE
+};
 
 //------------------------------------------------------------------------ 
 // Rôle de la classe <References>
@@ -32,12 +35,18 @@ class References
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	void TraiterFichiers(char * nomFichierMotsCles, vector<char *> nomFichiers);
+	void TraiterFichiers ( char * nomFichierMotsCles,
+	        vector<char *> &nomsFichiers );
 	// Mode d'emploi :
 	//
 	// Contrat :
 	//
 
+	string AfficherResultat ( );
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 	//------------------------------------------------- Surcharge d'opérateurs
 	References & operator = ( const References & unReferences );
@@ -45,7 +54,6 @@ public:
 	//
 	// Contrat :
 	//
-
 
 	//-------------------------------------------- Constructeurs - destructeur
 	References ( const References & unReferences );
