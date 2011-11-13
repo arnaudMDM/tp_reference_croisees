@@ -78,7 +78,7 @@ int main ( int argc, char ** argv )
 					positionAttendue = 2;
 				}
 				else {
-					positionAttendue = 3;
+					positionAttendue = 1;
 				}
 
 				if (i == positionAttendue) {
@@ -93,6 +93,10 @@ int main ( int argc, char ** argv )
 					cout << "Nombres d'arguments insuffisant" << endl;
 					return ERREUR_ARGS;
 				}
+			}
+			else {
+				cout << "Option inconnu" << endl;
+				return ERREUR_ARGS;
 			}
 		}
 		else {
