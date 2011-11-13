@@ -26,8 +26,8 @@ using namespace std;
 const int TAILLE_MAX_MOT = 50;
 const char DELIM[] = {
         ' ', '\t', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(', ')',
-        '!', '-', '+', '/', '*', '&', '|', '%', '$', '#' };
-const char TAILLE_DELIM = 24;
+        '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+const char TAILLE_DELIM = 34;
 const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",
@@ -44,11 +44,12 @@ const int TAILLE_MOTS_CLES_C = 63;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void References::TraiterFichiers ( char * nomFichierMotsCles,
+void References::TraiterFichiers (bool aExclureMotsCle, char * nomFichierMotsCles,
         vector<char *> &nomsFichiers )
 // Algorithme :
 //
 {
+	exclureMotsCles = aExclureMotsCle;
 	if ( nomFichierMotsCles != NULL )
 	{
 		lireFichierMotsCles ( nomFichierMotsCles );
@@ -61,7 +62,7 @@ void References::TraiterFichiers ( char * nomFichierMotsCles,
 
 	for ( vector<char *>::iterator it = nomsFichiers.begin ( );
 	        it < nomsFichiers.end ( ); it++ )
-	        {
+	{
 		lireFichier ( *it );
 	}
 } //----- Fin de TraiterFichiers
@@ -71,8 +72,10 @@ string References::AfficherResultat ( )
 //
 {
 	string str = "";
-	for (map<string, AssocRefFichier>::iterator it = references.begin(); it != references.end(); it++) {
-		str += it->first + " : " + it->second.AfficherLignes() + '\n';
+	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
+	        it != references.end ( ); it++ )
+	{
+		str += it->first + " : " + it->second.AfficherLignes ( ) + '\n';
 	}
 
 	return str;
@@ -123,12 +126,13 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 // Algorithme :
 //
 {
-	char str[TAILLE_MAX_MOT + 1];vector<string> * motsCles = new vector<string>;
+	char str[TAILLE_MAX_MOT + 1];
+	motsCles = new vector<string>;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
 
-	if (lecture.fail())
+	if ( lecture.fail ( ) )
 	{
 		Erreur e = ERREUR_LECTURE;
 		delete motsCles;
@@ -140,7 +144,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		lecture.getline ( str, TAILLE_MAX_MOT );
 
 		if ( strchr ( str, ' ' ) != NULL || strchr ( str, ',' ) != NULL
-				|| strchr ( str, ';' ) != NULL )
+		        || strchr ( str, ';' ) != NULL )
 		{
 			Erreur e = ERREUR_LECTURE;
 			delete motsCles;
@@ -150,7 +154,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		motsCles->push_back ( str );
 	}
 
-	lecture.close();
+	lecture.close ( );
 
 	return motsCles;
 } //----- Fin de lireFichierMotsCles
@@ -164,6 +168,7 @@ void References::lireFichier ( char * nomFichier )
 	int numLigne = 1;
 
 	int c;
+	int c2;
 	char carAttendu1 = -1;
 	char carAttendu2 = -1;
 
@@ -177,11 +182,10 @@ void References::lireFichier ( char * nomFichier )
 		{
 			if ( c == '/' )
 			{
-				char c2 = lecture.peek ( );
+				c2 = lecture.peek ( );
 				if ( c2 == '/' )
 				{
 					carAttendu1 = '\n';
-					numLigne++;
 					lecture.get ( );
 				}
 				else if ( c2 == '*' )
@@ -206,8 +210,11 @@ void References::lireFichier ( char * nomFichier )
 			}
 			else
 			{
-				traiterMot ( mot, numLigne );
-				mot = "";
+				if ( mot != "" )
+				{
+					traiterMot ( mot, numLigne );
+					mot.clear ( );
+				}
 			}
 		}
 		else

@@ -114,7 +114,7 @@ int main ( int argc, char ** argv )
 
 	References ref;
 	try {
-		ref.TraiterFichiers(nomFichierMotsCles, nomsFichiers);
+		ref.TraiterFichiers(exclureMotsCles, nomFichierMotsCles, nomsFichiers);
 	}
 	catch (Erreur &e) {
 		cerr << "Erreur" << endl;

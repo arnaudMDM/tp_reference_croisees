@@ -35,7 +35,7 @@ class References
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	void TraiterFichiers ( char * nomFichierMotsCles,
+	void TraiterFichiers ( bool, char * nomFichierMotsCles,
 	        vector<char *> &nomsFichiers );
 	// Mode d'emploi :
 	//
