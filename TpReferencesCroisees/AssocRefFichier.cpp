@@ -34,7 +34,7 @@ string AssocRefFichier::AfficherLignes()
 {
 	string str = "";
 	for (vector<int>::iterator it = lignes.begin(); it < lignes.end(); it++) {
-		str += *it + " ";
+		str += *it + '\t';
 	}
 
 	return str;

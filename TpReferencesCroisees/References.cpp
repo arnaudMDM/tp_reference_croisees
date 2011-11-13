@@ -75,7 +75,7 @@ string References::AfficherResultat ( )
 	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
 	        it != references.end ( ); it++ )
 	{
-		str += it->first + " : " + it->second.AfficherLignes ( ) + '\n';
+		str += it->first + '\t' + it->second.AfficherLignes ( ) + '\n';
 	}
 
 	return str;
