@@ -1,0 +1,3 @@
+ne pas autoriser d'écrie par exemple -eC:\Users...     Il faut que -e soit d'un espace
+On ne doit pas autoriser d'écrire des options où l'on veut. Sinon on fait erreur.
+Vérifier que si on -k, on a bien un nom juste après et non pas une option.
