@@ -11,6 +11,9 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
+#include <map>
+#include <string>
+#include "AssocFichLigne.h"
 
 //------------------------------------------------------------- Constantes 
 
@@ -28,13 +31,13 @@ class AssocRefFichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	void AjouterLigne ( int numLigne );
+	void TraiterFichier ( string , int numLigne );
 	// Mode d'emploi :
 	//
 	// Contrat :
 	//
 
-	string AfficherLignes ( );
+	string AfficherFichiers ( );
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -54,7 +57,7 @@ public:
 	// Contrat :
 	//
 
-	AssocRefFichier ( );
+	AssocRefFichier ();
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -73,6 +76,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	vector<int> lignes;
+	map<string, AssocFichLigne> fichiers;
 };
 
 //--------------------------- Autres définitions dépendantes de <AssocRefFichier>

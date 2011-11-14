@@ -75,7 +75,7 @@ string References::AfficherResultat ( )
 	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
 	        it != references.end ( ); it++ )
 	{
-		str += it->first + '\t' + it->second.AfficherLignes ( ) + '\n';
+		str += it->first + it->second.AfficherFichiers ( ) + '\n';
 	}
 
 	return str;
@@ -212,7 +212,7 @@ void References::lireFichier ( char * nomFichier )
 			{
 				if ( mot != "" )
 				{
-					traiterMot ( mot, numLigne );
+					traiterMot ( mot, nomFichier, numLigne );
 					mot.clear ( );
 				}
 			}
@@ -247,29 +247,30 @@ void References::lireFichier ( char * nomFichier )
 	}
 } //----- Fin de lireFichier
 
-void References::traiterMot ( string &mot, int numLigne )
+void References::traiterMot ( string &mot, char * nomFichier, int numLigne )
 {
 	if ( find ( motsCles->begin ( ), motsCles->end ( ), mot )
 	        != motsCles->end ( ) )
 	{
 		if ( !exclureMotsCles )
 		{
-			ajouterReference ( mot, numLigne );
+			ajouterReference ( mot, nomFichier, numLigne );
 		}
 	}
 	else if ( exclureMotsCles )
 	{
-		ajouterReference ( mot, numLigne );
+		ajouterReference ( mot, nomFichier, numLigne );
 	}
 }
 
-void References::ajouterReference ( string &mot, int numLigne )
+void References::ajouterReference ( string &mot, char * nomFichier, int numLigne )
 {
-	AssocRefFichier * assoc = new AssocRefFichier ( );
+	AssocRefFichier * assoc = new AssocRefFichier ();
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
 	paire = references.insert (
 	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
-	it->second.AjouterLigne ( numLigne );
+
+	it->second.TraiterFichier ( nomFichier, numLigne );
 }

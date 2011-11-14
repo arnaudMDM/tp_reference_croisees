@@ -80,8 +80,8 @@ protected:
 	//----------------------------------------------------- Méthodes protégées
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
 	void lireFichier ( char * nomFichier );
-	void traiterMot ( string &mot, int numLigne );
-	void ajouterReference ( string &mot, int numLigne );
+	void traiterMot ( string &mot, char *, int numLigne );
+	void ajouterReference ( string &mot, char *, int numLigne );
 
 	//----------------------------------------------------- Attributs protégés
 	map<string, AssocRefFichier> references;

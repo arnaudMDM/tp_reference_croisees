@@ -14,28 +14,38 @@ using namespace std;
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 //------------------------------------------------------ Include personnel
 #include "AssocRefFichier.h"
+#include "AssocFichLigne.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void AssocRefFichier::AjouterLigne ( int numLigne )
+void AssocRefFichier::TraiterFichier (string nomFichier, int numLigne )
 // Algorithme : trivial
 {
-	lignes.push_back(numLigne);
+	AssocFichLigne * assoc = new AssocFichLigne;
+	pair<map<string, AssocFichLigne>::iterator, bool> paire;
+	paire = fichiers.insert (
+	pair<string, AssocFichLigne> ( nomFichier, *(assoc) ) );
+	map<string, AssocFichLigne>::iterator it = paire.first;
+
+	it->second.AjouterLigne(numLigne);
 } //----- Fin de ajouterLigne
 
-string AssocRefFichier::AfficherLignes()
+string AssocRefFichier::AfficherFichiers()
 // Algorithme : parcourt du vector
 {
 	string str = "";
-	for (vector<int>::iterator it = lignes.begin(); it < lignes.end(); it++) {
-		str += *it + '\t';
-	}
+		for ( map<string, AssocFichLigne>::iterator it = fichiers.begin ( );
+		        it != fichiers.end ( ); it++ )
+		{
+			str += '\t' + it->first + it->second.AfficherLignes ( );
+		}
 
 	return str;
 }
@@ -60,7 +70,7 @@ AssocRefFichier::AssocRefFichier ( const AssocRefFichier & unAssocRefFichier )
 } //----- Fin de AssocRefFichier (constructeur de copie)
 
 
-AssocRefFichier::AssocRefFichier ( )
+AssocRefFichier::AssocRefFichier ()
 // Algorithme :
 //
 {
