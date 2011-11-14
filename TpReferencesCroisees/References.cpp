@@ -26,7 +26,8 @@ using namespace std;
 const int TAILLE_MAX_MOT = 50;
 const char DELIM[] = {
         ' ', '\t', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(', ')',
-        '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '0', '1', '2', '3',
+        '4', '5', '6', '7', '8', '9' };
 const char TAILLE_DELIM = 34;
 const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
@@ -44,8 +45,8 @@ const int TAILLE_MOTS_CLES_C = 63;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void References::TraiterFichiers (bool aExclureMotsCle, char * nomFichierMotsCles,
-        vector<char *> &nomsFichiers )
+void References::TraiterFichiers ( bool aExclureMotsCle,
+        char * nomFichierMotsCles, vector<char *> &nomsFichiers )
 // Algorithme :
 //
 {
@@ -135,7 +136,6 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 	if ( lecture.fail ( ) )
 	{
 		Erreur e = ERREUR_LECTURE;
-		delete motsCles;
 		throw e;
 	}
 
@@ -147,7 +147,6 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		        || strchr ( str, ';' ) != NULL )
 		{
 			Erreur e = ERREUR_LECTURE;
-			delete motsCles;
 			throw e;
 		}
 
@@ -173,6 +172,14 @@ void References::lireFichier ( char * nomFichier )
 	char carAttendu2 = -1;
 
 	lecture.open ( nomFichier );
+
+	lecture.open ( nomFichier );
+
+	if ( lecture.fail ( ) )
+	{
+		Erreur e = ERREUR_LECTURE;
+		throw e;
+	}
 
 	while (!lecture.eof ( ))
 	{
@@ -263,14 +270,14 @@ void References::traiterMot ( string &mot, char * nomFichier, int numLigne )
 	}
 }
 
-void References::ajouterReference ( string &mot, char * nomFichier, int numLigne )
+void References::ajouterReference ( string &mot, char * nomFichier,
+        int numLigne )
 {
-	AssocRefFichier * assoc = new AssocRefFichier ();
+	AssocRefFichier * assoc = new AssocRefFichier ( );
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
 	paire = references.insert (
 	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 	map<string, AssocRefFichier>::iterator it = paire.first;
-
 
 	it->second.TraiterFichier ( nomFichier, numLigne );
 }

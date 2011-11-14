@@ -35,14 +35,13 @@ public:
 	// Contrat :
 	//
 
+	string AfficherLignes ( );
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
-	string AfficherLignes ();
-		// Mode d'emploi :
-		//
-		// Contrat :
-		//
-
-	void AjouterLigne (int);
+	void AjouterLigne ( int );
 	// Mode d'emploi :
 	//
 	// Contrat :

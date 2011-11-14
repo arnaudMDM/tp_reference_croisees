@@ -31,7 +31,7 @@ class AssocRefFichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	void TraiterFichier ( string , int numLigne );
+	void TraiterFichier ( string, int numLigne );
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -57,7 +57,7 @@ public:
 	// Contrat :
 	//
 
-	AssocRefFichier ();
+	AssocRefFichier ( );
 	// Mode d'emploi :
 	//
 	// Contrat :
