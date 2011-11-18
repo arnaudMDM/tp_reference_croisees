@@ -36,7 +36,7 @@ class References
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	void TraiterFichiers ( bool, char * nomFichierMotsCles,
+	void TraiterFichiers ( bool exclureMotsCles, char * nomFichierMotsCles,
 	        set<string> &nomsFichiers );
 	// Mode d'emploi :
 	//
