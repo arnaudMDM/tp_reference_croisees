@@ -27,8 +27,8 @@ using namespace std;
 const int TAILLE_MAX_MOT = 50;
 const char DELIM[] = {
         ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}',
-        '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#' };
-const char TAILLE_DELIM = 25;
+        '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#','[', ']' };
+const char TAILLE_DELIM = 27;
 const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",

@@ -1,3 +1,5 @@
-ne pas autoriser d'écrie par exemple -eC:\Users...     Il faut que -e soit d'un espace
-On ne doit pas autoriser d'écrire des options où l'on veut. Sinon on fait erreur.
-Vérifier que si on -k, on a bien un nom juste après et non pas une option.
+On ne doit pas autoriser d'Ã©crire des options oÃ¹ l'on veut. Sinon on fait erreur.
+VÃ©rifier que si on -k, on a bien un nom juste aprÃ¨s et non pas une option.
+Directives de prÃ©-processeur
+Plusieurs fois un mot sur une mÃªme ligne
+si un des fichiers Ã  analyser est prÃ©sent plusieurs fois, on ne le traite qu'une seule fois.
