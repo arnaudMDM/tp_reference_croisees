@@ -10,15 +10,18 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <set>
 #include <vector>
+#include <string>
 
 //------------------------------------------------------ Include personnel
 #include "References.h"
 
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
-const int ERREUR_ARGS = 1;
-const int ERREUR_FICHIER_MOTS_CLES = 2;
+const int RET_ERR_ARGS = 1;
+const int RET_ERR_FICHIER_MOTS_CLES = 2;
+const int RET_ERR_LECTURE = 3;
 
 //------------------------------------------------------------------ Types
 
@@ -44,7 +47,7 @@ int main ( int argc, char ** argv )
 	if ( argc < 2 )
 	{
 		cout << "Nombres d'arguments insuffisant" << endl;
-		return ERREUR_ARGS;
+		return RET_ERR_ARGS;
 	}
 
 	bool exclureMotsCles = false;
@@ -52,7 +55,7 @@ int main ( int argc, char ** argv )
 	int positionAttendue;
 
 	char * nomFichierMotsCles = NULL;
-	vector<char *> nomsFichiers;
+	set<string> nomsFichiers;
 
 	// Traitement des arguments fournis
 	for ( int i = 1; i < argc; i++ )
@@ -67,14 +70,14 @@ int main ( int argc, char ** argv )
 					if ( argc < 3 )
 					{
 						cerr << "Aucun nom de fichier fourni" << endl;
-						return ERREUR_ARGS;
+						return RET_ERR_ARGS;
 					}
 					exclureMotsCles = true;
 				}
 				else
 				{
 					cerr << "Position de l'argument -e invalide" << endl;
-					return ERREUR_ARGS;
+					return RET_ERR_ARGS;
 				}
 			}
 			else if ( argv[i][1] == 'k' && argv[i][2] == 0 )
@@ -95,24 +98,24 @@ int main ( int argc, char ** argv )
 				else if ( argv[i + 1][0] == '-' )
 				{
 					cerr << "FichierMotCles attendu apres l'option -k" << endl;
-					return ERREUR_ARGS;
+					return RET_ERR_ARGS;
 				}
 				else
 				{
 					cerr << "Position de l'argument -k invalide" << endl;
-					return ERREUR_ARGS;
+					return RET_ERR_ARGS;
 				}
 
 				if ( argc < positionAttendue + 3 )
 				{
 					cerr << "Nombres d'arguments insuffisant" << endl;
-					return ERREUR_ARGS;
+					return RET_ERR_ARGS;
 				}
 			}
 			else
 			{
-				cerr << "Option inconnu" << endl;
-				return ERREUR_ARGS;
+				cerr << "Option inconnue" << endl;
+				return RET_ERR_ARGS;
 			}
 		}
 		else
@@ -125,7 +128,7 @@ int main ( int argc, char ** argv )
 			}
 			else
 			{
-				nomsFichiers.push_back ( argv[i] );
+				nomsFichiers.insert ( argv[i] );
 			}
 		}
 	}
@@ -139,7 +142,7 @@ int main ( int argc, char ** argv )
 	catch (Erreur &e)
 	{
 		cerr << "Erreur" << endl;
-		return 1;
+		return RET_ERR_LECTURE;
 	}
 
 	cout << ref.AfficherResultat ( ) << endl;

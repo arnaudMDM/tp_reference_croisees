@@ -13,10 +13,11 @@ using namespace std;
 #include <fstream>
 #include <map>
 #include <vector>
-#include <cstring>
 #include <string>
 #include <algorithm>
 #include <utility>
+#include <cstring>
+#include <cstdlib>
 
 //------------------------------------------------------ Include personnel
 #include "References.h"
@@ -25,46 +26,47 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 const int TAILLE_MAX_MOT = 50;
 const char DELIM[] = {
-        ' ', '\t', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(', ')',
-        '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '0', '1', '2', '3',
-        '4', '5', '6', '7', '8', '9' };
-const char TAILLE_DELIM = 34;
+        ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}',
+        '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#' };
+const char TAILLE_DELIM = 25;
 const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",
-        "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false",
-        "float", "for", "friend", "goto", "if", "inline", "int", "long",
-        "mutable", "namespace", "new", "operator", "private", "protected",
-        "public", "register", "reinterpret_cast", "return", "short", "signed",
-        "sizeof", "static", "static_cast", "struct", "switch", "template",
-        "this", "throw", "true", "try", "typedef", "typeid", "typename",
-        "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
-        "while" };
+        "dynamic_cast", "else", "enum", "explicit", "export", "extern",
+        "false", "float", "for", "friend", "goto", "if", "inline", "int",
+        "long", "mutable", "namespace", "new", "operator", "private",
+        "protected", "public", "register", "reinterpret_cast", "return",
+        "short", "signed", "sizeof", "static", "static_cast", "struct",
+        "switch", "template", "this", "throw", "true", "try", "typedef",
+        "typeid", "typename", "union", "unsigned", "using", "virtual", "void",
+        "volatile", "wchar_t", "while" };
 const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void References::TraiterFichiers ( bool aExclureMotsCle,
-        char * nomFichierMotsCles, vector<char *> &nomsFichiers )
+void References::TraiterFichiers ( bool optExclureMotsCle,
+        char * nomFichierMotsCles, set<string> &nomsFichiers )
 // Algorithme :
 //
 {
-	exclureMotsCles = aExclureMotsCle;
+	exclureMotsCles = optExclureMotsCle;
+
 	if ( nomFichierMotsCles != NULL )
 	{
 		lireFichierMotsCles ( nomFichierMotsCles );
 	}
 	else
 	{
-		motsCles = new vector<string> ( MOTS_CLES_C,
-		        MOTS_CLES_C + TAILLE_MOTS_CLES_C );
+		motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C
+		        + TAILLE_MOTS_CLES_C );
 	}
 
-	for ( vector<char *>::iterator it = nomsFichiers.begin ( );
-	        it < nomsFichiers.end ( ); it++ )
+	for ( set<string>::iterator it = nomsFichiers.begin ( ); it
+	        != nomsFichiers.end ( ); it++ )
 	{
-		lireFichier ( *it );
+		const char * truc = it->c_str();
+		lireFichier ( truc );
 	}
 } //----- Fin de TraiterFichiers
 
@@ -73,8 +75,8 @@ string References::AfficherResultat ( )
 //
 {
 	string str = "";
-	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
-	        it != references.end ( ); it++ )
+	for ( map<string, AssocRefFichier>::iterator it = references.begin ( ); it
+	        != references.end ( ); it++ )
 	{
 		str += it->first + it->second.AfficherFichiers ( ) + '\n';
 	}
@@ -127,8 +129,9 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 // Algorithme :
 //
 {
-	char str[TAILLE_MAX_MOT + 1];
-	motsCles = new vector<string>;
+	string str;
+	char c;
+	motsCles = new vector<string> ;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
@@ -141,10 +144,22 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 
 	while (!lecture.eof ( ))
 	{
-		lecture.getline ( str, TAILLE_MAX_MOT );
+		str = "";
 
-		if ( strchr ( str, ' ' ) != NULL || strchr ( str, ',' ) != NULL
-		        || strchr ( str, ';' ) != NULL )
+		// ajoute les caractères en provenance du flux jusqu'à trouver une fin de ligne
+		while ((c = lecture.get ( )) != '\n' && c != '\r' && c != -1)
+		{
+			str.push_back ( c );
+		}
+
+		// vide le "buffer" des éventuels '\n' et '\r' restants
+		while ((c = lecture.peek ( )) == '\n' || c == '\r')
+		{
+			lecture.get();
+		}
+
+		if ( str.find ( ' ' ) == 0 || str.find ( ',' ) == 0 || str.find ( ';' )
+		        == 0 )
 		{
 			Erreur e = ERREUR_LECTURE;
 			throw e;
@@ -158,7 +173,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 	return motsCles;
 } //----- Fin de lireFichierMotsCles
 
-void References::lireFichier ( char * nomFichier )
+void References::lireFichier ( const char * nomFichier )
 // Algorithme :
 //
 {
@@ -170,8 +185,6 @@ void References::lireFichier ( char * nomFichier )
 	int c2;
 	char carAttendu1 = -1;
 	char carAttendu2 = -1;
-
-	lecture.open ( nomFichier );
 
 	lecture.open ( nomFichier );
 
@@ -210,8 +223,8 @@ void References::lireFichier ( char * nomFichier )
 			{
 				carAttendu1 = '\'';
 			}
-			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c )
-			        == DELIM + TAILLE_DELIM )
+			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c ) == DELIM
+			        + TAILLE_DELIM )
 			{
 				mot.push_back ( c );
 			}
@@ -247,37 +260,50 @@ void References::lireFichier ( char * nomFichier )
 			}
 		}
 
-		if ( c == '\n' )
+		if ( lecture.peek ( ) == '\n' )
 		{
 			numLigne++;
 		}
 	}
 } //----- Fin de lireFichier
 
-void References::traiterMot ( string &mot, char * nomFichier, int numLigne )
+void References::traiterMot ( string &mot, const char * nomFichier, int numLigne )
 {
-	if ( find ( motsCles->begin ( ), motsCles->end ( ), mot )
-	        != motsCles->end ( ) )
+	const char * motC = mot.c_str ( );
+	char ** retourStrtod = (char**) malloc ( sizeof(char*) );
+
+	if ( strtod ( motC, retourStrtod ) == 0.0 && *retourStrtod == motC )
 	{
-		if ( !exclureMotsCles )
+		if ( find ( motsCles->begin ( ), motsCles->end ( ), mot )
+		        != motsCles->end ( ) )
+		{
+			if ( !exclureMotsCles )
+			{
+				ajouterReference ( mot, nomFichier, numLigne );
+			}
+		}
+		else if ( exclureMotsCles )
 		{
 			ajouterReference ( mot, nomFichier, numLigne );
 		}
 	}
-	else if ( exclureMotsCles )
-	{
-		ajouterReference ( mot, nomFichier, numLigne );
-	}
+
+	delete retourStrtod;
 }
 
-void References::ajouterReference ( string &mot, char * nomFichier,
+void References::ajouterReference ( string &mot, const char * nomFichier,
         int numLigne )
+//
 {
 	AssocRefFichier * assoc = new AssocRefFichier ( );
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
-	paire = references.insert (
-	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
+	paire
+	        = references.insert (
+	                pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
 	it->second.TraiterFichier ( nomFichier, numLigne );
+
+	delete assoc;
+
 }

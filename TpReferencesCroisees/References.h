@@ -11,6 +11,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
+#include <set>
 #include <vector>
 #include <string>
 #include "AssocRefFichier.h"
@@ -36,7 +37,7 @@ class References
 public:
 	//----------------------------------------------------- Méthodes publiques
 	void TraiterFichiers ( bool, char * nomFichierMotsCles,
-	        vector<char *> &nomsFichiers );
+	        set<string> &nomsFichiers );
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -79,9 +80,9 @@ public:
 protected:
 	//----------------------------------------------------- Méthodes protégées
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
-	void lireFichier ( char * nomFichier );
-	void traiterMot ( string &mot, char *, int numLigne );
-	void ajouterReference ( string &mot, char *, int numLigne );
+	void lireFichier ( const char * nomFichier );
+	void traiterMot ( string &mot, const char * nomFichier, int numLigne );
+	void ajouterReference ( string &mot, const char * nomFichier, int numLigne );
 
 	//----------------------------------------------------- Attributs protégés
 	map<string, AssocRefFichier> references;

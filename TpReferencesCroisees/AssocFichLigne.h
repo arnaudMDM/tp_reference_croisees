@@ -73,7 +73,6 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	vector<int> lignes;
-
 };
 
 //--------------------------- Autres définitions dépendantes de <AssocFichLigne>

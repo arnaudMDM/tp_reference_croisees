@@ -32,6 +32,8 @@ void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
 	        pair<string, AssocFichLigne> ( nomFichier, *(assoc) ) );
 	map<string, AssocFichLigne>::iterator it = paire.first;
 	it->second.AjouterLigne ( numLigne );
+
+	delete assoc;
 } //----- Fin de ajouterLigne
 
 string AssocRefFichier::AfficherFichiers ( )

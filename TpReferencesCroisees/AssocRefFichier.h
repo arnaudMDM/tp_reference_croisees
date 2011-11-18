@@ -75,7 +75,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	vector<int> lignes;
 	map<string, AssocFichLigne> fichiers;
 };
 
