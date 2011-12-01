@@ -46,6 +46,7 @@ string AssocRefFichier::AfficherFichiers ( )
 		str += '\t' + it->first + it->second.AfficherLignes ( );
 	}
 
+
 	return str;
 }
 
