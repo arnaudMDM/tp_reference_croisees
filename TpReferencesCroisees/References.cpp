@@ -139,7 +139,8 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 	{
 		str = "";
 
-		// ajoute les caractères en provenance du flux jusqu'à trouver une fin de ligne
+		// ajoute les caractères en provenance du flux jusqu'à trouver une
+		//fin de ligne
 		while ((c = lecture.get ( )) != '\n' && c != '\r' && c != -1)
 		{
 			str.push_back ( c );

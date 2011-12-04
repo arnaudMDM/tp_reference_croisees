@@ -17,7 +17,6 @@
 //------------------------------------------------------------- Constantes 
 
 //------------------------------------------------------------------ Types 
-typedef vector<int> vecint;
 
 //------------------------------------------------------------------------ 
 // Rôle de la classe <AssocRefFichier>
@@ -80,7 +79,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
 	//fichiers possède comme clés des noms de fichiers et pointent vers un
 	//un tableau d'entier
-	map<string, vecint> fichiers;
+	map<string, vector<int> > fichiers;
 };
 
 //--------------------------- Autres définitions dépendantes de <AssocRefFichier>
