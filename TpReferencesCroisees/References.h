@@ -38,7 +38,13 @@ public:
 	//----------------------------------------------------- Méthodes publiques
 	void TraiterFichiers ( bool exclureMotsCles, char * nomFichierMotsCles,
 	        set<string> &nomsFichiers );
-	// Mode d'emploi :
+	// Mode d'emploi : Calcule les identificateurs souhaités. Le calcul dépend
+	//du paramètre exclureMotsCles qui précise si on veut oui ou non connaitre
+	//les idenctificateurs présents dans les mots-clés. nomFichierMotsCles est
+	// l'adresse du nom de fichier où sont présnts les mots clés. En l'absence
+	// de ce paramètre, le programme prend une liste de mots clés par défaut.
+	//nomsFichiers est un objet de type Set qui comporte les noms de fichiers
+	//à analyser.
 	//
 	// Contrat :
 	//
@@ -82,7 +88,8 @@ protected:
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
 	void lireFichier ( const char * nomFichier );
 	void traiterMot ( string &mot, const char * nomFichier, int numLigne );
-	void ajouterReference ( string &mot, const char * nomFichier, int numLigne );
+	void ajouterReference ( string &mot, const char * nomFichier,
+	        int numLigne );
 
 	//----------------------------------------------------- Attributs protégés
 	map<string, AssocRefFichier> references;
