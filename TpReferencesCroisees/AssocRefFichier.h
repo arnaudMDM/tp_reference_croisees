@@ -21,7 +21,7 @@ typedef vector<int> vecint;
 
 //------------------------------------------------------------------------ 
 // Rôle de la classe <AssocRefFichier>
-//La classe permet de lier des fichiers à un objet de la classe AssocFichLigne
+//La classe permet de lier des fichiers à un tableau d'entier
 //
 //
 //------------------------------------------------------------------------ 
@@ -33,7 +33,7 @@ class AssocRefFichier
 public:
 //----------------------------------------------------- Méthodes publiques
 	void TraiterFichier ( string nomFichier, int numLigne );
-	// Mode d'emploi :Lie le nom nomFichier à objet de la classe AssocFichLigne
+	// Mode d'emploi :Lie le nom nomFichier à un tableau d'entier
 	//en ajoutant l'entier numLigne à cet objet.
 	//
 	// Contrat :
@@ -79,7 +79,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	//fichiers possède comme clés des noms de fichiers et pointent vers un
-	//objet de type AssocFichLigne
+	//un tableau d'entier
 	map<string, vecint> fichiers;
 };
 
