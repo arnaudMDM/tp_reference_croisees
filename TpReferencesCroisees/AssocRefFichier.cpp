@@ -10,13 +10,13 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <map>
 
 //------------------------------------------------------ Include personnel
 #include "AssocRefFichier.h"
-#include "AssocFichLigne.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -26,37 +26,48 @@ using namespace std;
 void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
 // Algorithme : trivial
 {
-	AssocFichLigne * assoc = new AssocFichLigne;
-	pair<map<string, AssocFichLigne>::iterator, bool> paire;
+	vector<int> * vec = new vector<int>;
+	pair<map<string, vector<int> >::iterator, bool> paire;
 	paire = fichiers.insert (
-	        pair<string, AssocFichLigne> ( nomFichier, *(assoc) ) );
-	map<string, AssocFichLigne>::iterator it = paire.first;
-	it->second.AjouterLigne ( numLigne );
+	        pair<string, vector<int> > ( nomFichier, *(vec) ) );
+	map<string, vector<int> >::iterator it = paire.first;
+	it->second.push_back(numLigne);
 
-	delete assoc;
+	delete vec;
 } //----- Fin de ajouterLigne
 
 string AssocRefFichier::AfficherFichiers ( )
 // Algorithme : parcourt du vector
 {
 	string str = "";
-	for ( map<string, AssocFichLigne>::iterator it = fichiers.begin ( );
+	for ( map<string, vector<int> >::iterator it = fichiers.begin ( );
 	        it != fichiers.end ( ); it++ )
 	{
-		str += '\t' + it->first + it->second.AfficherLignes ( );
+		str += '\t' + it->first + AfficherLignes (it->second);
 	}
 
 
 	return str;
 }
 
-//------------------------------------------------- Surcharge d'opérateurs
-/*
- AssocRefFichier & AssocRefFichier::operator = ( const AssocRefFichier & unAssocRefFichier )
- // Algorithme :
- //
- {
- } //----- Fin de operator =*/
+string AssocRefFichier::AfficherLignes (vector<int> lignes)
+// Algorithme :
+//
+{
+	string str = "";
+	ostringstream oss;
+	for ( vector<int>::iterator it = lignes.begin ( ); it != lignes.end ( );
+	        it++ )
+	{
+		oss << *(it);
+		str += ' ' + oss.str ( );
+		oss.str ( "" );
+	}
+
+	return str;
+} //----- Fin de Méthode
+
+
 
 //-------------------------------------------- Constructeurs - destructeur
 AssocRefFichier::AssocRefFichier ( const AssocRefFichier & unAssocRefFichier )

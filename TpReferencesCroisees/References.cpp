@@ -84,14 +84,7 @@ string References::AfficherResultat ( )
 	return str;
 }
 
-//------------------------------------------------- Surcharge d'opérateurs
-/*
- References & References::operator = ( const References & unReferences )
- // Algorithme :
- //
- {
- } //----- Fin de operator =
- */
+
 
 //-------------------------------------------- Constructeurs - destructeur
 References::References ( const References & unReferences )
