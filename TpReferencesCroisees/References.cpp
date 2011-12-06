@@ -2,10 +2,10 @@
  References  -  description
  -------------------
  début                : 10 nov. 2011
- copyright            : (C) 2011 par rgicquel
+ copyright            : (C) 2011 par Robin Gicquel et Arnaud Mery de Montigny
  *************************************************************************/
 
-//---------- Réalisation de la classe <References> (fichier References.cpp) -------
+//------- Réalisation de la classe <References> (fichier References.cpp) -----
 //---------------------------------------------------------------- INCLUDE
 //-------------------------------------------------------- Include système
 using namespace std;

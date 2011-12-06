@@ -2,7 +2,7 @@
  References  -  description
  -------------------
  début                : 10 nov. 2011
- copyright            : (C) 2011 par rgicquel
+ copyright            : (C) 2011 par Robin Gicquel et Arnaud Mery de Montigny
  *************************************************************************/
 
 //---------- Interface de la classe <References> (fichier References.h) ------
