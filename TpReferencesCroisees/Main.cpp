@@ -98,7 +98,7 @@ int main ( int argc, char ** argv )
 				}
 				else if ( argv[i + 1][0] == '-' )
 				{
-					cerr << "FichierMotCles attendu apres l'option -k" << endl;
+					cerr << "FichierMotCles attendu après l'option -k" << endl;
 					return RET_ERR_ARGS;
 				}
 				else
