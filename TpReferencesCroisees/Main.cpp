@@ -137,7 +137,16 @@ int main ( int argc, char ** argv )
 	}
 	catch (Erreur &e)
 	{
-		cerr << "Erreur" << endl;
+		if (e == ERREUR_OUVERTURE) {
+			cerr << "Erreur lors de l'ouverture d'un fichier source" << endl;
+		}
+		else if (e == ERREUR_LECTURE_MOTS_CLES) {
+			cerr << "Erreur de syntaxe dans le fichier de mots-clés" << endl;
+		}
+		else if (e == ERREUR_OUVERTURE_MOTS_CLES) {
+			cerr << "Erreur lors de l'ouverture du fichier de mots-clés" << endl;
+		}
+
 		return RET_ERR_LECTURE;
 	}
 

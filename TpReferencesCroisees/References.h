@@ -23,7 +23,9 @@
 //------------------------------------------------------------------ Types 
 enum Erreur
 {
-	ERREUR_LECTURE
+	ERREUR_OUVERTURE,
+	ERREUR_OUVERTURE_MOTS_CLES,
+	ERREUR_LECTURE_MOTS_CLES
 };
 
 

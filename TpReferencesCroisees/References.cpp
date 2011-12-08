@@ -132,8 +132,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 
 	if ( lecture.fail ( ) )
 	{
-		Erreur e = ERREUR_LECTURE;
-		throw e;
+		throw ERREUR_OUVERTURE_MOTS_CLES;
 	}
 
 	while (!lecture.eof ( ))
@@ -156,8 +155,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 		if ( str.find ( ' ' ) == 0 || str.find ( ',' ) == 0 || str.find ( ';' )
 		        == 0 || str.find ( '\t' ) == 0 )
 		{
-			Erreur e = ERREUR_LECTURE;
-			throw e;
+			throw ERREUR_LECTURE_MOTS_CLES;
 		}
 
 		motsCles->push_back ( str );
@@ -169,9 +167,10 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 } //----- Fin de lireFichierMotsCles
 
 void References::lireFichier ( const char * nomFichier )
-// Algorithme : Lecture caractère par caratère d'un fichier avec détection des
-// commentaires. Dès qu'un mot est isolé, il est recherché dans la liste des
-// mots clés et ajouté aux références en fonction des options fournies
+// Algorithme :
+//	Lecture caractère par caratère d'un fichier avec détection des
+//	commentaires. Dès qu'un mot est isolé, il est recherché dans la liste des
+//	mots clés et ajouté aux références en fonction des options fournies.
 {
 	ifstream lecture;
 	string mot = "";
@@ -186,8 +185,7 @@ void References::lireFichier ( const char * nomFichier )
 
 	if ( lecture.fail ( ) )
 	{
-		Erreur e = ERREUR_LECTURE;
-		throw e;
+		throw ERREUR_OUVERTURE;
 	}
 
 	while (!lecture.eof ( ))
