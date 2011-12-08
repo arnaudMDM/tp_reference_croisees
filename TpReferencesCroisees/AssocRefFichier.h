@@ -25,7 +25,7 @@
 //------------------------------------------------------------------------ 
 // Rôle de la classe AssocRefFichier :
 //	La classe permet de représenter une association entre un nom de fichier et
-//	une liste de numéro de lignes (aussi appelés références)
+//	une liste de numéro de lignes (aussi appelés références).
 //------------------------------------------------------------------------ 
 
 class AssocRefFichier
@@ -35,8 +35,9 @@ class AssocRefFichier
 public:
 //----------------------------------------------------- Méthodes publiques
 	void AjouterReference ( string nomFichier, int numLigne );
-	// Mode d'emploi : Lie le nom nomFichier à un tableau d'entier
-	//en ajoutant l'entier numLigne à cet objet.
+	// Mode d'emploi :
+	//	Ajoute un numéro de ligne pour un fichier. Si le fichier n'est pas
+	//	encore référencé, il est ajouté en tant que clé à la map.
 	//
 	// Contrat :
 	//	Aucun
@@ -44,8 +45,8 @@ public:
 
 	string AfficherFichiers ( );
 	// Mode d'emploi :
-	//	Retourne une chaine de caractère représentant
-	//	les fichiers avec les numéros de lignes qui leurs sont liés
+	//	Retourne une chaine de caractère représentant les fichiers avec
+	//	les numéros de lignes qui leurs sont liés.
 	//
 	// Contrat :
 	//	Aucun
@@ -66,28 +67,30 @@ public:
 	//	Aucun
 
 	virtual ~AssocRefFichier ( );
-	// Mode d'emploi : Destrcteur de la classe
+	// Mode d'emploi : Destructeur de la classe
 	//
-	// Contrat : Aucun
+	// Contrat :
+	//	Aucun
 
 //------------------------------------------------------------------ PRIVE 
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	string afficherLignes (vector<int> lignes);
-	// Mode d'emploi : Retourne une chaine de caractère représentant des
-	//numéros de lignes
+	string afficherLignes (vector<int> & lignes);
+	// Mode d'emploi :
+	//	Retourne une chaine de caractère représentant les numéros de lignes
+	//	contenus dans le vector passé en paramètre.
 	//
 	// Contrat :
 	//	Aucun
 
 //----------------------------------------------------- Attributs protégés
 
-	//fichiers possède comme clés des noms de fichiers et pointent vers un
-	//un tableau d'entier
 	map<string, vector<int> > fichiers;
+	// fichiers possède comme clés des noms de fichiers et comme valeur un
+	// tableau dynamique d'entiers représentant des numéros de ligne
 };
 
-//--------------------------- Autres définitions dépendantes de <AssocRefFichier>
+//------------------------ Autres définitions dépendantes de <AssocRefFichier>
 
 #endif // ASSOCREFFICHIER_H_

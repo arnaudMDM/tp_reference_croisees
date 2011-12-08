@@ -19,8 +19,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
 static const int RET_ERR_ARGS = 1;
-static const int RET_ERR_FICHIER_MOTS_CLES = 2;
-static const int RET_ERR_LECTURE = 3;
+static const int RET_ERR_LECTURE = 2;
 
 
 //------------------------------------------------------------------ Types

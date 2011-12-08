@@ -29,8 +29,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void AssocRefFichier::AjouterReference ( string nomFichier, int numLigne )
-// Algorithme :
-//	Ajout d'un fichier dans l'attribut de type map.
+// Algorithme : Trivial
 {
 	vector<int> * vec = new vector<int>;
 
@@ -93,9 +92,8 @@ AssocRefFichier::~AssocRefFichier ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-string AssocRefFichier::afficherLignes (vector<int> lignes)
+string AssocRefFichier::afficherLignes (vector<int> & lignes)
 // Algorithme : Trivial
-//
 {
 	string str = "";
 	ostringstream oss;

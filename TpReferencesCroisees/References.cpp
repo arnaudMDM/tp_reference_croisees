@@ -6,9 +6,7 @@
  *************************************************************************/
 
 //------- Réalisation de la classe <References> (fichier References.cpp) -----
-
 //---------------------------------------------------------------- INCLUDE
-
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <fstream>
@@ -26,20 +24,20 @@ using namespace std;
 
 //------------------------------------------------------------- Constantes
 static const char DELIM[] = {
-        ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}',
-        '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
+        ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(',
+        ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
 static const char TAILLE_DELIM = 27;
 static const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",
-        "dynamic_cast", "else", "enum", "explicit", "export", "extern",
-        "false", "float", "for", "friend", "goto", "if", "inline", "int",
-        "long", "mutable", "namespace", "new", "operator", "private",
-        "protected", "public", "register", "reinterpret_cast", "return",
-        "short", "signed", "sizeof", "static", "static_cast", "struct",
-        "switch", "template", "this", "throw", "true", "try", "typedef",
-        "typeid", "typename", "union", "unsigned", "using", "virtual", "void",
-        "volatile", "wchar_t", "while" };
+        "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false",
+        "float", "for", "friend", "goto", "if", "inline", "int", "long",
+        "mutable", "namespace", "new", "operator", "private", "protected",
+        "public", "register", "reinterpret_cast", "return", "short", "signed",
+        "sizeof", "static", "static_cast", "struct", "switch", "template",
+        "this", "throw", "true", "try", "typedef", "typeid", "typename",
+        "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
+        "while" };
 static const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------------------- PUBLIC
@@ -56,13 +54,13 @@ void References::TraiterFichiers ( char * nomFichierMotsCles,
 	else
 	{
 		// remplissage du vector à partir du tableau constant de mots-clés
-		motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C
-		        + TAILLE_MOTS_CLES_C );
+		motsCles = new vector<string> ( MOTS_CLES_C,
+		        MOTS_CLES_C + TAILLE_MOTS_CLES_C );
 	}
 
-	for ( set<string>::iterator it = nomsFichiers.begin ( ); it
-	        != nomsFichiers.end ( ); it++ )
-	{
+	for ( set<string>::iterator it = nomsFichiers.begin ( );
+	        it != nomsFichiers.end ( ); it++ )
+	        {
 		const char * truc = it->c_str ( );
 		lireFichier ( truc );
 	}
@@ -72,15 +70,14 @@ string References::AfficherResultat ( )
 // Algorithme : Trivial
 {
 	string str = "";
-	for ( map<string, AssocRefFichier>::iterator it = references.begin ( ); it
-	        != references.end ( ); it++ )
-	{
+	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
+	        it != references.end ( ); it++ )
+	        {
 		str += it->first + it->second.AfficherFichiers ( ) + '\n';
 	}
 
 	return str;
 } //----- Fin de AfficherResultat
-
 
 //-------------------------------------------- Constructeurs - destructeur
 References::References ( const References & unReferences )
@@ -100,7 +97,7 @@ References::References ( )
 } //----- Fin de References (contructeur par défaut)
 
 References::References ( bool optExclureMotsCles ) :
-	exclureMotsCles ( optExclureMotsCles )
+		exclureMotsCles ( optExclureMotsCles )
 // Algorithme : Trivial
 {
 #ifdef MAP
@@ -125,7 +122,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 {
 	string str;
 	char c;
-	motsCles = new vector<string> ;
+	motsCles = new vector<string>;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
@@ -152,8 +149,10 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 			lecture.get ( );
 		}
 
-		if ( str.find ( ' ' ) == 0 || str.find ( ',' ) == 0 || str.find ( ';' )
-		        == 0 || str.find ( '\t' ) == 0 )
+		if ( str.find ( ' ' ) == string::npos
+		        || str.find ( ',' ) == string::npos
+		        || str.find ( ';' ) == string::npos
+		        || str.find ( '\t' ) == string::npos )
 		{
 			throw ERREUR_LECTURE_MOTS_CLES;
 		}
@@ -217,8 +216,8 @@ void References::lireFichier ( const char * nomFichier )
 			{
 				carAttendu1 = '\'';
 			}
-			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c ) == DELIM
-			        + TAILLE_DELIM ) // Recherche du mot lu dans les mots-clés
+			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c )
+			        == DELIM + TAILLE_DELIM ) // Recherche du mot lu dans les mots-clés
 			{
 				mot.push_back ( c );
 			}
@@ -303,9 +302,8 @@ void References::ajouterReference ( string &mot, const char * nomFichier,
 
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
 
-	paire
-	        = references.insert (
-	                pair<string, AssocRefFichier> ( mot, *(assoc) ) );
+	paire = references.insert (
+	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
 
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
