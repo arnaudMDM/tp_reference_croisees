@@ -11,7 +11,6 @@
 using namespace std;
 #include <iostream>
 #include <set>
-#include <vector>
 #include <string>
 
 //------------------------------------------------------ Include personnel
@@ -19,25 +18,22 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
-const int RET_ERR_ARGS = 1;
-const int RET_ERR_FICHIER_MOTS_CLES = 2;
-const int RET_ERR_LECTURE = 3;
+static const int RET_ERR_ARGS = 1;
+static const int RET_ERR_FICHIER_MOTS_CLES = 2;
+static const int RET_ERR_LECTURE = 3;
+
 
 //------------------------------------------------------------------ Types
 
+
 //---------------------------------------------------- Variables statiques
 
+
 //------------------------------------------------------ Fonctions privées
-//static type nom ( liste de paramètres )
-// Mode d'emploi :
-//
-// Contrat :
-//
-// Algorithme :
-//{
-//} //----- fin de nom
+
 
 //////////////////////////////////////////////////////////////////  PUBLIC
+
 //---------------------------------------------------- Fonctions publiques
 int main ( int argc, char ** argv )
 // Algorithme : Lecture des paramètres fournis à l'exécution, vérification de
@@ -108,7 +104,7 @@ int main ( int argc, char ** argv )
 
 				if ( argc < positionAttendue + 3 )
 				{
-					cerr << "Nombres d'arguments insuffisant" << endl;
+					cerr << "Nombre d'arguments insuffisant" << endl;
 					return RET_ERR_ARGS;
 				}
 			}

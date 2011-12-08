@@ -6,7 +6,9 @@
  *************************************************************************/
 
 //- Réalisation de la classe <AssocRefFichier> (fichier AssocRefFichier.cpp) -
+
 //---------------------------------------------------------------- INCLUDE
+
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
@@ -15,15 +17,18 @@ using namespace std;
 #include <string>
 #include <map>
 
+
 //------------------------------------------------------ Include personnel
 #include "AssocRefFichier.h"
 
+
 //------------------------------------------------------------- Constantes
+
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
+void AssocRefFichier::AjouterReference ( string nomFichier, int numLigne )
 // Algorithme :
 //	Ajout d'un fichier dans l'attribut de type map.
 {
@@ -49,7 +54,7 @@ string AssocRefFichier::AfficherFichiers ( )
 	for ( map<string, vector<int> >::iterator it = fichiers.begin ( );
 	        it != fichiers.end ( ); it++ )
 	{
-		str += '\t' + it->first + AfficherLignes (it->second);
+		str += '\t' + it->first + afficherLignes (it->second);
 	}
 
 	return str;
@@ -83,11 +88,12 @@ AssocRefFichier::~AssocRefFichier ( )
 #endif
 } //----- Fin de ~AssocRefFichier
 
+
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
 
-string AssocRefFichier::AfficherLignes (vector<int> lignes)
+string AssocRefFichier::afficherLignes (vector<int> lignes)
 // Algorithme : Trivial
 //
 {

@@ -11,7 +11,6 @@
 
 //-------------------------------------------------------- Include système
 using namespace std;
-#include <iostream>
 #include <fstream>
 #include <map>
 #include <vector>
@@ -56,6 +55,7 @@ void References::TraiterFichiers ( char * nomFichierMotsCles,
 	}
 	else
 	{
+		// remplissage du vector à partir du tableau constant de mots-clés
 		motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C
 		        + TAILLE_MOTS_CLES_C );
 	}
@@ -265,12 +265,19 @@ void References::lireFichier ( const char * nomFichier )
 
 void References::traiterMot ( string &mot, const char * nomFichier,
         int numLigne )
-// Algorithme : Trivial
+// Algorithme : Trivial, point délicat détaillé dans le corps
 {
 	const char * motC = mot.c_str ( );
-	//char ** retourStrtod = (char**) malloc ( sizeof(char*) );
 	char ** retourStrtod = new char*;
 
+	// Pour vérifier si motC n'est pas un nombre, on teste s'il s'agit d'un
+	// réel. Pour cela, on utilise la fonction C strtod qui renvoie 0.0 si la
+	// chaîne passée en paramètre ne correspond pas à un nombre réel. Pour
+	// différencier la lecture de la chaîne "0" et celle d'une chaîne quelconque
+	// ne correspondant pas à un nombre réel, la fonction affecte l'adresse du
+	// premier paramètre passé à la valeur du second paramètre passé. Ainsi, en
+	// vérifiant que *retourStrtod est égal à motC, on est assuré que le mot est
+	// ou n'est un nombre.
 	if ( strtod ( motC, retourStrtod ) == 0.0 && *retourStrtod == motC )
 	{
 		if ( find ( motsCles->begin ( ), motsCles->end ( ), mot )
@@ -304,7 +311,7 @@ void References::ajouterReference ( string &mot, const char * nomFichier,
 
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
-	it->second.TraiterFichier ( nomFichier, numLigne );
+	it->second.AjouterReference ( nomFichier, numLigne );
 
 	delete assoc;
 

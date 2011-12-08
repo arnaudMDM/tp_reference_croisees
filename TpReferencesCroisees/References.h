@@ -14,9 +14,11 @@
 #include <set>
 #include <vector>
 #include <string>
+
 #include "AssocRefFichier.h"
 
 //------------------------------------------------------------- Constantes 
+
 
 //------------------------------------------------------------------ Types 
 enum Erreur
@@ -24,12 +26,13 @@ enum Erreur
 	ERREUR_LECTURE
 };
 
+
 //------------------------------------------------------------------------ 
-// Rôle de la classe <References>
-//References est une classe générale qui permet de connaitre les identificateurs
-//d'un ou plusieurs fichiers. Cela est fonction des mots-clés demandés par
-//un client ou par défaut, et fonction de l'utilisateur à vouloir connaitre
-//les identificateurs présents dans les mots-clés ou qui ne le sont pas.
+// Rôle de la classe <References> :
+//	References est la classe qui permet de faire le lien entre les
+//	identificateurs et les noms de fichier qui les contiennent. Elle contient
+//	les fonctions permettant de lire les fichiers de mots-clés et les fichiers
+//	source.
 //
 //------------------------------------------------------------------------ 
 
@@ -38,6 +41,7 @@ class References
 	//----------------------------------------------------------------- PUBLIC
 
 public:
+
 	//----------------------------------------------------- Méthodes publiques
 	void
 	        TraiterFichiers ( char * nomFichierMotsCles,
@@ -96,6 +100,7 @@ public:
 	//	Aucun
 	//
 
+
 	//------------------------------------------------------------------ PRIVE
 
 protected:
@@ -137,17 +142,18 @@ protected:
 	//----------------------------------------------------- Attributs protégés
 
 	map<string, AssocRefFichier> references;
-	// references possède comme clés les identificateurs retenus et pointent vers
-	// une instance de la classe AssocRefFichier
+	// references possède comme clés les identificateurs retenus et pointent
+	// vers une instance de AssocRefFichier
 
 	vector<string> * motsCles;
 	// Tableau dynamique de mots-clés
 
 
 	bool exclureMotsCles;
-	// Précise si on veut retenir uniquemehnt les mots-clés ou tous les
+	// Précise si on veut lister uniquement les mots-clés ou bien tous les
 	// identificateurs sauf les mots-clés.
 };
+
 
 //--------------------------- Autres définitions dépendantes de <References>
 

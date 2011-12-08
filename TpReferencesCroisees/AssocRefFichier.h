@@ -5,23 +5,27 @@
  copyright            : (C) 2011 par Robin Gicquel et Arnaud Mery de Montigny
  *************************************************************************/
 
-//---------- Interface de la classe <AssocRefFichier> (fichier AssocRefFichier.h) ------
+//--- Interface de la classe <AssocRefFichier> (fichier AssocRefFichier.h) ---
 #if ! defined ( ASSOCREFFICHIER_H_ )
 #define ASSOCREFFICHIER_H_
+
 
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
 #include <map>
 #include <string>
 
-//------------------------------------------------------------- Constantes 
 
-//------------------------------------------------------------------ Types 
+//------------------------------------------------------------- Constantes
+
+
+//------------------------------------------------------------------ Types
+
 
 //------------------------------------------------------------------------ 
-// Rôle de la classe <AssocRefFichier>
-//	La classe permet de lier des fichiers à un tableau d'entier
-//
+// Rôle de la classe AssocRefFichier :
+//	La classe permet de représenter une association entre un nom de fichier et
+//	une liste de numéro de lignes (aussi appelés références)
 //------------------------------------------------------------------------ 
 
 class AssocRefFichier
@@ -30,8 +34,8 @@ class AssocRefFichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	void TraiterFichier ( string nomFichier, int numLigne );
-	// Mode d'emploi :Lie le nom nomFichier à un tableau d'entier
+	void AjouterReference ( string nomFichier, int numLigne );
+	// Mode d'emploi : Lie le nom nomFichier à un tableau d'entier
 	//en ajoutant l'entier numLigne à cet objet.
 	//
 	// Contrat :
@@ -70,7 +74,7 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	string AfficherLignes (vector<int> lignes);
+	string afficherLignes (vector<int> lignes);
 	// Mode d'emploi : Retourne une chaine de caractère représentant des
 	//numéros de lignes
 	//
