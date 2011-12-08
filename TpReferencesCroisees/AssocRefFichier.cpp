@@ -37,6 +37,7 @@ void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
 
 	it->second.push_back(numLigne);
 
+	// le contenu de vec a été copié, on doit donc libérer la mémoire
 	delete vec;
 } //----- Fin de ajouterLigne
 
@@ -50,12 +51,11 @@ string AssocRefFichier::AfficherFichiers ( )
 		str += '\t' + it->first + AfficherLignes (it->second);
 	}
 
-
 	return str;
 }
 
 string AssocRefFichier::AfficherLignes (vector<int> lignes)
-// Algorithme :
+// Algorithme : Trivial
 //
 {
 	string str = "";
@@ -69,23 +69,22 @@ string AssocRefFichier::AfficherLignes (vector<int> lignes)
 	}
 
 	return str;
-} //----- Fin de Méthode
-
+} //----- Fin de AfficherLignes
 
 
 //-------------------------------------------- Constructeurs - destructeur
 AssocRefFichier::AssocRefFichier ( const AssocRefFichier & unAssocRefFichier )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <AssocRefFichier>" << endl;
 #endif
+	// appel au constructeur par copie de map
+	fichiers = unAssocRefFichier.fichiers;
 } //----- Fin de AssocRefFichier (constructeur de copie)
 
 AssocRefFichier::AssocRefFichier ( )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <AssocRefFichier>" << endl;
@@ -93,8 +92,7 @@ AssocRefFichier::AssocRefFichier ( )
 } //----- Fin de AssocRefFichier
 
 AssocRefFichier::~AssocRefFichier ( )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au destructeur de <AssocRefFichier>" << endl;

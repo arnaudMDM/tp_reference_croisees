@@ -47,13 +47,10 @@ static const int TAILLE_MOTS_CLES_C = 63;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void References::TraiterFichiers ( bool optExclureMotsCle,
-        char * nomFichierMotsCles, set<string> &nomsFichiers )
+void References::TraiterFichiers ( char * nomFichierMotsCles, set<string> &nomsFichiers )
 // Algorithme :
 //
 {
-	exclureMotsCles = optExclureMotsCle;
-
 	if ( nomFichierMotsCles != NULL )
 	{
 		lireFichierMotsCles ( nomFichierMotsCles );
@@ -73,8 +70,7 @@ void References::TraiterFichiers ( bool optExclureMotsCle,
 } //----- Fin de TraiterFichiers
 
 string References::AfficherResultat ( )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 	string str = "";
 	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
@@ -84,7 +80,7 @@ string References::AfficherResultat ( )
 	}
 
 	return str;
-}
+} //----- Fin de AfficherResultat
 
 
 
@@ -96,9 +92,19 @@ References::References ( const References & unReferences )
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <References>" << endl;
 #endif
+
 } //----- Fin de References (constructeur de copie)
 
 References::References ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+	cout << "Appel au constructeur de <References>" << endl;
+#endif
+} //----- Fin de References
+
+References::References ( bool optExclureMotsCles ) : exclureMotsCles(optExclureMotsCles)
 // Algorithme :
 //
 {
@@ -121,8 +127,7 @@ References::~References ( )
 
 //----------------------------------------------------- Méthodes protégées
 vector<string> * References::lireFichierMotsCles ( char * nomFichier )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 	string str;
 	char c;
@@ -170,8 +175,7 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 } //----- Fin de lireFichierMotsCles
 
 void References::lireFichier ( const char * nomFichier )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 	ifstream lecture;
 	string mot = "";
@@ -265,6 +269,7 @@ void References::lireFichier ( const char * nomFichier )
 
 void References::traiterMot ( string &mot, const char * nomFichier,
         int numLigne )
+// Algorithme : Trivial
 {
 	const char * motC = mot.c_str ( );
 	char ** retourStrtod = (char**) malloc ( sizeof(char*) );
@@ -286,11 +291,11 @@ void References::traiterMot ( string &mot, const char * nomFichier,
 	}
 
 	delete retourStrtod;
-}
+} //----- Fin de traiterMot
 
 void References::ajouterReference ( string &mot, const char * nomFichier,
         int numLigne )
-//
+// Algorithme : Trivial
 {
 	AssocRefFichier * assoc = new AssocRefFichier ( );
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
@@ -302,4 +307,4 @@ void References::ajouterReference ( string &mot, const char * nomFichier,
 
 	delete assoc;
 
-}
+} //----- Fin de ajouterReference

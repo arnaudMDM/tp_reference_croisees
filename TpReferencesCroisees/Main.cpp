@@ -133,10 +133,10 @@ int main ( int argc, char ** argv )
 		}
 	}
 
-	References ref;
+	References ref(exclureMotsCles);
 	try
 	{
-		ref.TraiterFichiers ( exclureMotsCles, nomFichierMotsCles,
+		ref.TraiterFichiers ( nomFichierMotsCles,
 		        nomsFichiers );
 	}
 	catch (Erreur &e)

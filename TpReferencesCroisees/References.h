@@ -39,8 +39,9 @@ class References
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	void TraiterFichiers ( bool exclureMotsCles, char * nomFichierMotsCles,
-	        set<string> &nomsFichiers );
+	void
+	        TraiterFichiers ( char * nomFichierMotsCles,
+	                set<string> &nomsFichiers );
 	// Mode d'emploi : Calcule les identificateurs souhaités. Le calcul dépend
 	//du paramètre exclureMotsCles qui précise si on veut connaitre
 	//les idenctificateurs présents dans les mots-clés ou les autres.
@@ -68,6 +69,13 @@ public:
 	//
 
 	References ( );
+	// Mode d'emploi : Constrcuteur par défaut de la classe. Affecte la valeur
+	// false à l'attribut exclureMotsCles
+	//
+	// Contrat : Aucun
+	//
+
+	References ( bool optExclureMotsCles );
 	// Mode d'emploi :
 	//
 	// Contrat :
@@ -83,27 +91,34 @@ public:
 
 protected:
 	//----------------------------------------------------- Méthodes protégées
+
 	//Lit le fichier nomFichier et retourne les mots-clés présents dans le
 	//ficher
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
+
 	//Lit un fichier quelconque et en discerne les identificateurs pour pouvoir
 	//les traiter
 	void lireFichier ( const char * nomFichier );
+
 	//Ajoute le mot en fonction de la variable exclureMotsCles
 	void traiterMot ( string &mot, const char * nomFichier, int numLigne );
+
 	//ajoute le mot comme identificateur si il n'a pas déjç était ajouté et
 	//le nom de fichier et le numéro de ligne.
-	void ajouterReference ( string &mot, const char * nomFichier,
-	        int numLigne );
+	void ajouterReference ( string &mot, const char * nomFichier, int numLigne );
+
 
 	//----------------------------------------------------- Attributs protégés
-	//references possède comme clés les identificateurs retenus et pointent vers
-	//un de la classe AssocRefFichier
+
+	// references possède comme clés les identificateurs retenus et pointent vers
+	// un de la classe AssocRefFichier
 	map<string, AssocRefFichier> references;
-	//motsCles est un tableau dynamique de mots-clés
+
+	// motsCles est un tableau dynamique de mots-clés
 	vector<string> * motsCles;
-	//exclureMotsCles est un booléen qui précise si on veut connaitre
-	//les idenctificateurs présents dans les mots-clés ou les autres.
+
+	// exclureMotsCles est un booléen qui précise si on veut connaitre
+	// les idenctificateurs présents dans les mots-clés ou les autres.
 	bool exclureMotsCles;
 };
 
