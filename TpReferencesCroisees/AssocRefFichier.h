@@ -51,6 +51,7 @@ public:
 	// Contrat :
 	//	Aucun
 
+
 //-------------------------------------------- Constructeurs - destructeur
 	AssocRefFichier ( const AssocRefFichier & unAssocRefFichier );
 	// Mode d'emploi (constructeur de copie) :
@@ -72,11 +73,12 @@ public:
 	// Contrat :
 	//	Aucun
 
+
 //------------------------------------------------------------------ PRIVE 
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	string afficherLignes (vector<int> & lignes);
+	string afficherLignes ( vector<int> & lignes );
 	// Mode d'emploi :
 	//	Retourne une chaine de caractère représentant les numéros de lignes
 	//	contenus dans le vector passé en paramètre.
@@ -84,12 +86,14 @@ protected:
 	// Contrat :
 	//	Aucun
 
+
 //----------------------------------------------------- Attributs protégés
 
 	map<string, vector<int> > fichiers;
 	// fichiers possède comme clés des noms de fichiers et comme valeur un
 	// tableau dynamique d'entiers représentant des numéros de ligne
 };
+
 
 //------------------------ Autres définitions dépendantes de <AssocRefFichier>
 

@@ -6,17 +6,22 @@
  *************************************************************************/
 
 //---------- Réalisation du module <Main> (fichier Main.cpp) -----
+
 /////////////////////////////////////////////////////////////////  INCLUDE
+
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
 #include <set>
 #include <string>
 
+
 //------------------------------------------------------ Include personnel
 #include "References.h"
 
+
 ///////////////////////////////////////////////////////////////////  PRIVE
+
 //------------------------------------------------------------- Constantes
 static const int RET_ERR_ARGS = 1;
 static const int RET_ERR_LECTURE = 2;
@@ -35,9 +40,10 @@ static const int RET_ERR_LECTURE = 2;
 
 //---------------------------------------------------- Fonctions publiques
 int main ( int argc, char ** argv )
-// Algorithme : Lecture des paramètres fournis à l'exécution, vérification de
-// leur validité puis lancement des opérations de traitement de fichiers avec
-// les options adéquates
+// Algorithme :
+//	Lecture des paramètres fournis à l'exécution, vérification de
+//	leur validité puis lancement des opérations de traitement de fichiers avec
+//	les options adéquates.
 {
 	if ( argc < 2 )
 	{
@@ -128,22 +134,25 @@ int main ( int argc, char ** argv )
 		}
 	}
 
-	References ref(exclureMotsCles);
+	References ref ( exclureMotsCles );
 	try
 	{
-		ref.TraiterFichiers ( nomFichierMotsCles,
-		        nomsFichiers );
+		ref.TraiterFichiers ( nomFichierMotsCles, nomsFichiers );
 	}
 	catch (Erreur &e)
 	{
-		if (e == ERREUR_OUVERTURE) {
+		if ( e == ERREUR_OUVERTURE )
+		{
 			cerr << "Erreur lors de l'ouverture d'un fichier source" << endl;
 		}
-		else if (e == ERREUR_LECTURE_MOTS_CLES) {
+		else if ( e == ERREUR_LECTURE_MOTS_CLES )
+		{
 			cerr << "Erreur de syntaxe dans le fichier de mots-clés" << endl;
 		}
-		else if (e == ERREUR_OUVERTURE_MOTS_CLES) {
-			cerr << "Erreur lors de l'ouverture du fichier de mots-clés" << endl;
+		else if ( e == ERREUR_OUVERTURE_MOTS_CLES )
+		{
+			cerr << "Erreur lors de l'ouverture du fichier de mots-clés"
+			        << endl;
 		}
 
 		return RET_ERR_LECTURE;

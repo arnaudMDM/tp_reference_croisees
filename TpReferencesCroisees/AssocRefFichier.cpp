@@ -40,7 +40,7 @@ void AssocRefFichier::AjouterReference ( string nomFichier, int numLigne )
 
 	map<string, vector<int> >::iterator it = paire.first;
 
-	it->second.push_back(numLigne);
+	it->second.push_back ( numLigne );
 
 	// le contenu de vec a été copié, on doit donc libérer la mémoire
 	delete vec;
@@ -52,8 +52,8 @@ string AssocRefFichier::AfficherFichiers ( )
 	string str = "";
 	for ( map<string, vector<int> >::iterator it = fichiers.begin ( );
 	        it != fichiers.end ( ); it++ )
-	{
-		str += '\t' + it->first + afficherLignes (it->second);
+	        {
+		str += '\t' + it->first + afficherLignes ( it->second );
 	}
 
 	return str;
@@ -92,14 +92,14 @@ AssocRefFichier::~AssocRefFichier ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-string AssocRefFichier::afficherLignes (vector<int> & lignes)
+string AssocRefFichier::afficherLignes ( vector<int> & lignes )
 // Algorithme : Trivial
 {
 	string str = "";
 	ostringstream oss;
 	for ( vector<int>::iterator it = lignes.begin ( ); it != lignes.end ( );
 	        it++ )
-	{
+	        {
 		oss << *(it);
 		str += ' ' + oss.str ( );
 		oss.str ( "" );

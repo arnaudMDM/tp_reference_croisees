@@ -6,7 +6,9 @@
  *************************************************************************/
 
 //------- Réalisation de la classe <References> (fichier References.cpp) -----
+
 //---------------------------------------------------------------- INCLUDE
+
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <fstream>
@@ -18,9 +20,11 @@ using namespace std;
 #include <cstring>
 #include <cstdlib>
 
+
 //------------------------------------------------------ Include personnel
 #include "References.h"
 #include "AssocRefFichier.h"
+
 
 //------------------------------------------------------------- Constantes
 static const char DELIM[] = {
@@ -39,6 +43,7 @@ static const string MOTS_CLES_C[] = {
         "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
         "while" };
 static const int TAILLE_MOTS_CLES_C = 63;
+
 
 //----------------------------------------------------------------- PUBLIC
 
@@ -79,6 +84,7 @@ string References::AfficherResultat ( )
 	return str;
 } //----- Fin de AfficherResultat
 
+
 //-------------------------------------------- Constructeurs - destructeur
 References::References ( const References & unReferences )
 // Algorithme : Trivial
@@ -113,6 +119,7 @@ References::~References ( )
 #endif
 	delete motsCles;
 } //----- Fin de ~References
+
 
 //------------------------------------------------------------------ PRIVE
 

@@ -9,6 +9,7 @@
 #if ! defined ( REFERENCES_H_ )
 #define REFERENCES_H_
 
+
 //--------------------------------------------------- Interfaces utilisées
 #include <map>
 #include <set>
@@ -16,6 +17,7 @@
 #include <string>
 
 #include "AssocRefFichier.h"
+
 
 //------------------------------------------------------------- Constantes 
 
@@ -46,8 +48,7 @@ public:
 
 	//----------------------------------------------------- Méthodes publiques
 	void
-	        TraiterFichiers ( char * nomFichierMotsCles,
-	                set<string> &nomsFichiers );
+	TraiterFichiers ( char * nomFichierMotsCles, set<string> &nomsFichiers );
 	// Mode d'emploi :
 	//	Calcule les identificateurs souhaités. Le calcul dépend du paramètre
 	//  exclureMotsCles qui précise si on veut connaitre
@@ -67,7 +68,6 @@ public:
 	//
 	// Contrat :
 	//	Aucun
-
 
 	//-------------------------------------------- Constructeurs - destructeur
 	References ( const References & unReferences );
@@ -132,7 +132,8 @@ protected:
 	// Contrat :
 	//	Aucun
 
-	void ajouterReference ( string &mot, const char * nomFichier, int numLigne );
+	void ajouterReference ( string &mot, const char * nomFichier,
+	        int numLigne );
 	// Mode d'emploi :
 	//	Ajoute le mot comme identificateur si il n'a pas déjà
 	//	été ajouté et le nom de fichier et le numéro de ligne.
@@ -149,7 +150,6 @@ protected:
 
 	vector<string> * motsCles;
 	// Tableau dynamique de mots-clés
-
 
 	bool exclureMotsCles;
 	// Précise si on veut lister uniquement les mots-clés ou bien tous les
