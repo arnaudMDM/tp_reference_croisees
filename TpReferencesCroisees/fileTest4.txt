@@ -1,0 +1,6 @@
+//coucou
+int a;
+/*voici
+quelquechose d'interessant*/
+char b = 'a';
+string c = "bonjour";

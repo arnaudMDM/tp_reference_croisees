@@ -26,7 +26,6 @@ using namespace std;
 #include "AssocRefFichier.h"
 
 //------------------------------------------------------------- Constantes
-static const int TAILLE_MAX_MOT = 50;
 static const char DELIM[] = {
         ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}',
         '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
