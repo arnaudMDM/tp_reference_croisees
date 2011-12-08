@@ -24,20 +24,24 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
-// Algorithme : trivial
+// Algorithme : Ajout d'un fichier dans l'attribut de type map
 {
 	vector<int> * vec = new vector<int>;
+
 	pair<map<string, vector<int> >::iterator, bool> paire;
+
 	paire = fichiers.insert (
 	        pair<string, vector<int> > ( nomFichier, *(vec) ) );
+
 	map<string, vector<int> >::iterator it = paire.first;
+
 	it->second.push_back(numLigne);
 
 	delete vec;
 } //----- Fin de ajouterLigne
 
 string AssocRefFichier::AfficherFichiers ( )
-// Algorithme : parcourt du vector
+// Algorithme : Trivial
 {
 	string str = "";
 	for ( map<string, vector<int> >::iterator it = fichiers.begin ( );

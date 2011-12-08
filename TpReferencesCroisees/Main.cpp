@@ -34,15 +34,15 @@ const int RET_ERR_LECTURE = 3;
 // Contrat :
 //
 // Algorithme :
-//
 //{
 //} //----- fin de nom
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
 int main ( int argc, char ** argv )
-// Algorithme :
-//
+// Algorithme : Lecture des paramètres fournis à l'exécution, vérification de
+// leur validité puis lancement des opérations de traitement de fichiers avec
+// les options adéquates
 {
 	if ( argc < 2 )
 	{

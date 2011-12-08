@@ -6,7 +6,9 @@
  *************************************************************************/
 
 //------- Réalisation de la classe <References> (fichier References.cpp) -----
+
 //---------------------------------------------------------------- INCLUDE
+
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
@@ -24,12 +26,12 @@ using namespace std;
 #include "AssocRefFichier.h"
 
 //------------------------------------------------------------- Constantes
-const int TAILLE_MAX_MOT = 50;
-const char DELIM[] = {
+static const int TAILLE_MAX_MOT = 50;
+static const char DELIM[] = {
         ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(',
         ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
-const char TAILLE_DELIM = 27;
-const string MOTS_CLES_C[] = {
+static const char TAILLE_DELIM = 27;
+static const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",
         "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false",
@@ -40,7 +42,7 @@ const string MOTS_CLES_C[] = {
         "this", "throw", "true", "try", "typedef", "typeid", "typename",
         "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
         "while" };
-const int TAILLE_MOTS_CLES_C = 63;
+static const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------------------- PUBLIC
 

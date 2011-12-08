@@ -74,9 +74,9 @@ public:
 	//
 
 	virtual ~References ( );
-	// Mode d'emploi :
+	// Mode d'emploi : Destructeur de la classe
 	//
-	// Contrat :
+	// Contrat : Aucun
 	//
 
 	//------------------------------------------------------------------ PRIVE

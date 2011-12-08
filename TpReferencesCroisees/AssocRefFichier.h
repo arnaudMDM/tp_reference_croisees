@@ -35,7 +35,7 @@ public:
 	// Mode d'emploi :Lie le nom nomFichier à un tableau d'entier
 	//en ajoutant l'entier numLigne à cet objet.
 	//
-	// Contrat :
+	// Contrat : Aucun
 	//
 
 	string AfficherFichiers ( );
@@ -50,7 +50,7 @@ public:
 	//numéros de lignes
 	//
 	// Contrat :
-	//
+	//	Aucun
 
 //-------------------------------------------- Constructeurs - destructeur
 	AssocRefFichier ( const AssocRefFichier & unAssocRefFichier );
@@ -60,16 +60,15 @@ public:
 	//
 
 	AssocRefFichier ( );
-	// Mode d'emploi :
+	// Mode d'emploi : Constrcuteur par défaut de la classe
 	//
-	// Contrat :
+	// Contrat : Aucun
 	//
 
 	virtual ~AssocRefFichier ( );
-	// Mode d'emploi :
+	// Mode d'emploi : Destrcteur de la classe
 	//
-	// Contrat :
-	//
+	// Contrat : Aucun
 
 //------------------------------------------------------------------ PRIVE 
 
