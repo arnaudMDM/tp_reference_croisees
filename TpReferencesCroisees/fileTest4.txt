@@ -1,6 +1,6 @@
-//coucou
+//commentaire
 int a;
 /*voici
-quelquechose d'interessant*/
+un autre commentaire*/
 char b = 'a';
-string c = "bonjour";
+string c = "Hello";
