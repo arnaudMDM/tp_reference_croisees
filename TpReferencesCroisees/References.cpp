@@ -28,28 +28,28 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 static const int TAILLE_MAX_MOT = 50;
 static const char DELIM[] = {
-        ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}', '(',
-        ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
+        ' ', '\t', '\r', '\n', ';', ':', ',', '.', '<', '>', '=', '{', '}',
+        '(', ')', '!', '-', '+', '/', '*', '&', '|', '%', '$', '#', '[', ']' };
 static const char TAILLE_DELIM = 27;
 static const string MOTS_CLES_C[] = {
         "asm", "auto", "bool", "break", "case", "catch", "char", "class",
         "const", "const_char", "continue", "default", "delete", "do", "double",
-        "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false",
-        "float", "for", "friend", "goto", "if", "inline", "int", "long",
-        "mutable", "namespace", "new", "operator", "private", "protected",
-        "public", "register", "reinterpret_cast", "return", "short", "signed",
-        "sizeof", "static", "static_cast", "struct", "switch", "template",
-        "this", "throw", "true", "try", "typedef", "typeid", "typename",
-        "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t",
-        "while" };
+        "dynamic_cast", "else", "enum", "explicit", "export", "extern",
+        "false", "float", "for", "friend", "goto", "if", "inline", "int",
+        "long", "mutable", "namespace", "new", "operator", "private",
+        "protected", "public", "register", "reinterpret_cast", "return",
+        "short", "signed", "sizeof", "static", "static_cast", "struct",
+        "switch", "template", "this", "throw", "true", "try", "typedef",
+        "typeid", "typename", "union", "unsigned", "using", "virtual", "void",
+        "volatile", "wchar_t", "while" };
 static const int TAILLE_MOTS_CLES_C = 63;
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void References::TraiterFichiers ( char * nomFichierMotsCles, set<string> &nomsFichiers )
-// Algorithme :
-//
+void References::TraiterFichiers ( char * nomFichierMotsCles,
+        set<string> &nomsFichiers )
+// Algorithme : Trivial
 {
 	if ( nomFichierMotsCles != NULL )
 	{
@@ -57,12 +57,12 @@ void References::TraiterFichiers ( char * nomFichierMotsCles, set<string> &nomsF
 	}
 	else
 	{
-		motsCles = new vector<string> ( MOTS_CLES_C,
-		        MOTS_CLES_C + TAILLE_MOTS_CLES_C );
+		motsCles = new vector<string> ( MOTS_CLES_C, MOTS_CLES_C
+		        + TAILLE_MOTS_CLES_C );
 	}
 
-	for ( set<string>::iterator it = nomsFichiers.begin ( );
-	        it != nomsFichiers.end ( ); it++ )
+	for ( set<string>::iterator it = nomsFichiers.begin ( ); it
+	        != nomsFichiers.end ( ); it++ )
 	{
 		const char * truc = it->c_str ( );
 		lireFichier ( truc );
@@ -73,8 +73,8 @@ string References::AfficherResultat ( )
 // Algorithme : Trivial
 {
 	string str = "";
-	for ( map<string, AssocRefFichier>::iterator it = references.begin ( );
-	        it != references.end ( ); it++ )
+	for ( map<string, AssocRefFichier>::iterator it = references.begin ( ); it
+	        != references.end ( ); it++ )
 	{
 		str += it->first + it->second.AfficherFichiers ( ) + '\n';
 	}
@@ -83,30 +83,26 @@ string References::AfficherResultat ( )
 } //----- Fin de AfficherResultat
 
 
-
 //-------------------------------------------- Constructeurs - destructeur
 References::References ( const References & unReferences )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <References>" << endl;
 #endif
-
 } //----- Fin de References (constructeur de copie)
 
 References::References ( )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
-	cout << "Appel au constructeur de <References>" << endl;
+	cout << "Appel au constructeur par défaut de <References>" << endl;
 #endif
-} //----- Fin de References
+} //----- Fin de References (contructeur par défaut)
 
-References::References ( bool optExclureMotsCles ) : exclureMotsCles(optExclureMotsCles)
-// Algorithme :
-//
+References::References ( bool optExclureMotsCles ) :
+	exclureMotsCles ( optExclureMotsCles )
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <References>" << endl;
@@ -114,8 +110,7 @@ References::References ( bool optExclureMotsCles ) : exclureMotsCles(optExclureM
 } //----- Fin de References
 
 References::~References ( )
-// Algorithme :
-//
+// Algorithme : Trivial
 {
 #ifdef MAP
 	cout << "Appel au destructeur de <References>" << endl;
@@ -127,11 +122,11 @@ References::~References ( )
 
 //----------------------------------------------------- Méthodes protégées
 vector<string> * References::lireFichierMotsCles ( char * nomFichier )
-// Algorithme : Trivial
+// Algorithme : Lecture ligne par ligne d'un fichier
 {
 	string str;
 	char c;
-	motsCles = new vector<string>;
+	motsCles = new vector<string> ;
 	ifstream lecture;
 
 	lecture.open ( nomFichier );
@@ -146,21 +141,21 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 	{
 		str = "";
 
-		// ajoute les caractères en provenance du flux jusqu'à trouver une
-		//fin de ligne
+		// Ajoute les caractères en provenance du flux jusqu'à trouver une
+		// fin de ligne
 		while ((c = lecture.get ( )) != '\n' && c != '\r' && c != -1)
 		{
 			str.push_back ( c );
 		}
 
-		// vide le "buffer" des éventuels '\n' et '\r' restants
+		// Vide le "buffer" des éventuels '\n' et '\r' restants
 		while ((c = lecture.peek ( )) == '\n' || c == '\r')
 		{
 			lecture.get ( );
 		}
 
-		if ( str.find ( ' ' ) == 0 || str.find ( ',' ) == 0
-		        || str.find ( ';' ) == 0 || str.find ( '\t' ) == 0 )
+		if ( str.find ( ' ' ) == 0 || str.find ( ',' ) == 0 || str.find ( ';' )
+		        == 0 || str.find ( '\t' ) == 0 )
 		{
 			Erreur e = ERREUR_LECTURE;
 			throw e;
@@ -175,7 +170,9 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 } //----- Fin de lireFichierMotsCles
 
 void References::lireFichier ( const char * nomFichier )
-// Algorithme : Trivial
+// Algorithme : Lecture caractère par caratère d'un fichier avec détection des
+// commentaires. Dès qu'un mot est isolé, il est recherché dans la liste des
+// mots clés et ajouté aux références en fonction des options fournies
 {
 	ifstream lecture;
 	string mot = "";
@@ -223,8 +220,8 @@ void References::lireFichier ( const char * nomFichier )
 			{
 				carAttendu1 = '\'';
 			}
-			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c )
-			        == DELIM + TAILLE_DELIM )
+			else if ( find ( DELIM, DELIM + TAILLE_DELIM, c ) == DELIM
+			        + TAILLE_DELIM ) // Recherche du mot lu dans les mots-clés
 			{
 				mot.push_back ( c );
 			}
@@ -272,7 +269,8 @@ void References::traiterMot ( string &mot, const char * nomFichier,
 // Algorithme : Trivial
 {
 	const char * motC = mot.c_str ( );
-	char ** retourStrtod = (char**) malloc ( sizeof(char*) );
+	//char ** retourStrtod = (char**) malloc ( sizeof(char*) );
+	char ** retourStrtod = new char*;
 
 	if ( strtod ( motC, retourStrtod ) == 0.0 && *retourStrtod == motC )
 	{
@@ -298,9 +296,13 @@ void References::ajouterReference ( string &mot, const char * nomFichier,
 // Algorithme : Trivial
 {
 	AssocRefFichier * assoc = new AssocRefFichier ( );
+
 	pair<map<string, AssocRefFichier>::iterator, bool> paire;
-	paire = references.insert (
-	        pair<string, AssocRefFichier> ( mot, *(assoc) ) );
+
+	paire
+	        = references.insert (
+	                pair<string, AssocRefFichier> ( mot, *(assoc) ) );
+
 	map<string, AssocRefFichier>::iterator it = paire.first;
 
 	it->second.TraiterFichier ( nomFichier, numLigne );

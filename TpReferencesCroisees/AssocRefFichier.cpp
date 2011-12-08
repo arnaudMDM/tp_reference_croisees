@@ -24,7 +24,8 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void AssocRefFichier::TraiterFichier ( string nomFichier, int numLigne )
-// Algorithme : Ajout d'un fichier dans l'attribut de type map
+// Algorithme :
+//	Ajout d'un fichier dans l'attribut de type map.
 {
 	vector<int> * vec = new vector<int>;
 
@@ -53,23 +54,6 @@ string AssocRefFichier::AfficherFichiers ( )
 
 	return str;
 }
-
-string AssocRefFichier::AfficherLignes (vector<int> lignes)
-// Algorithme : Trivial
-//
-{
-	string str = "";
-	ostringstream oss;
-	for ( vector<int>::iterator it = lignes.begin ( ); it != lignes.end ( );
-	        it++ )
-	{
-		oss << *(it);
-		str += ' ' + oss.str ( );
-		oss.str ( "" );
-	}
-
-	return str;
-} //----- Fin de AfficherLignes
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -102,3 +86,20 @@ AssocRefFichier::~AssocRefFichier ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+string AssocRefFichier::AfficherLignes (vector<int> lignes)
+// Algorithme : Trivial
+//
+{
+	string str = "";
+	ostringstream oss;
+	for ( vector<int>::iterator it = lignes.begin ( ); it != lignes.end ( );
+	        it++ )
+	{
+		oss << *(it);
+		str += ' ' + oss.str ( );
+		oss.str ( "" );
+	}
+
+	return str;
+} //----- Fin de AfficherLignes

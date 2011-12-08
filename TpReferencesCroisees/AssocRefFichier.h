@@ -20,8 +20,7 @@
 
 //------------------------------------------------------------------------ 
 // Rôle de la classe <AssocRefFichier>
-//La classe permet de lier des fichiers à un tableau d'entier
-//
+//	La classe permet de lier des fichiers à un tableau d'entier
 //
 //------------------------------------------------------------------------ 
 
@@ -35,19 +34,14 @@ public:
 	// Mode d'emploi :Lie le nom nomFichier à un tableau d'entier
 	//en ajoutant l'entier numLigne à cet objet.
 	//
-	// Contrat : Aucun
+	// Contrat :
+	//	Aucun
 	//
 
 	string AfficherFichiers ( );
-	// Mode d'emploi : Retourne une chaine de caractère représentant
-	//les fichiers avec les numéros de lignes qui leurs sont liés
-	//
-	// Contrat :
-	//
-
-	string AfficherLignes (vector<int> lignes);
-	// Mode d'emploi : Retourne une chaine de caractère représentant des
-	//numéros de lignes
+	// Mode d'emploi :
+	//	Retourne une chaine de caractère représentant
+	//	les fichiers avec les numéros de lignes qui leurs sont liés
 	//
 	// Contrat :
 	//	Aucun
@@ -55,15 +49,17 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 	AssocRefFichier ( const AssocRefFichier & unAssocRefFichier );
 	// Mode d'emploi (constructeur de copie) :
+	//	Constructeur par copie de la classe.
 	//
 	// Contrat :
-	//
+	//	Aucun
 
 	AssocRefFichier ( );
-	// Mode d'emploi : Constrcuteur par défaut de la classe
+	// Mode d'emploi :
+	//	Constrcuteur par défaut de la classe
 	//
-	// Contrat : Aucun
-	//
+	// Contrat :
+	//	Aucun
 
 	virtual ~AssocRefFichier ( );
 	// Mode d'emploi : Destrcteur de la classe
@@ -74,8 +70,15 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+	string AfficherLignes (vector<int> lignes);
+	// Mode d'emploi : Retourne une chaine de caractère représentant des
+	//numéros de lignes
+	//
+	// Contrat :
+	//	Aucun
 
 //----------------------------------------------------- Attributs protégés
+
 	//fichiers possède comme clés des noms de fichiers et pointent vers un
 	//un tableau d'entier
 	map<string, vector<int> > fichiers;

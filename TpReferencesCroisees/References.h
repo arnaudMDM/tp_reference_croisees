@@ -42,49 +42,58 @@ public:
 	void
 	        TraiterFichiers ( char * nomFichierMotsCles,
 	                set<string> &nomsFichiers );
-	// Mode d'emploi : Calcule les identificateurs souhaités. Le calcul dépend
-	//du paramètre exclureMotsCles qui précise si on veut connaitre
-	//les idenctificateurs présents dans les mots-clés ou les autres.
-	//nomFichierMotsCles est l'adresse du nom de fichier où sont présnts les
-	//mots clés. En l'absence de ce paramètre, le programme prend une liste de
-	//mots clés par défaut. nomsFichiers est un objet de type Set qui comporte
-	//les noms de fichiers à analyser.
+	// Mode d'emploi :
+	//	Calcule les identificateurs souhaités. Le calcul dépend du paramètre
+	//  exclureMotsCles qui précise si on veut connaitre
+	//	les idenctificateurs présents dans les mots-clés ou les autres.
+	//	nomFichierMotsCles est l'adresse du nom de fichier où sont présnts les
+	//	mots clés. En l'absence de ce paramètre, le programme prend une liste de
+	//	mots clés par défaut. nomsFichiers est un objet de type Set qui comporte
+	//	les noms de fichiers à analyser.
 	//
-	// Contrat : aucun
-	//
+	// Contrat :
+	//	Aucun
 
 	string AfficherResultat ( );
-	// Mode d'emploi : Affiche Les identificateurs avec les fichiers et les
-	//numéros de lignes qui leurs sont liés
+	// Mode d'emploi :
+	//	Affiche Les identificateurs avec les fichiers et les numéros de lignes
+	//	qui leurs sont liés.
 	//
-	// Contrat : aucun
-	//
+	// Contrat :
+	//	Aucun
 
 
 	//-------------------------------------------- Constructeurs - destructeur
 	References ( const References & unReferences );
 	// Mode d'emploi (constructeur de copie) :
+	//	Constructeur par copie de la classe.
 	//
 	// Contrat :
-	//
+	//	Aucun
 
 	References ( );
-	// Mode d'emploi : Constrcuteur par défaut de la classe. Affecte la valeur
-	// false à l'attribut exclureMotsCles
+	// Mode d'emploi :
+	//	Constructeur par défaut de la classe. Affecte la valeur false à
+	//	l'attribut exclureMotsCles.
 	//
-	// Contrat : Aucun
-	//
+	// Contrat :
+	//	Aucun
 
 	References ( bool optExclureMotsCles );
 	// Mode d'emploi :
+	//	Contructeur de la classe permettant de spécifier la valeur de
+	//	exlureMotsCles.
 	//
 	// Contrat :
+	//	Aucun
 	//
 
 	virtual ~References ( );
-	// Mode d'emploi : Destructeur de la classe
+	// Mode d'emploi :
+	//	Destructeur de la classe.
 	//
-	// Contrat : Aucun
+	// Contrat :
+	//	Aucun
 	//
 
 	//------------------------------------------------------------------ PRIVE
@@ -92,34 +101,52 @@ public:
 protected:
 	//----------------------------------------------------- Méthodes protégées
 
-	//Lit le fichier nomFichier et retourne les mots-clés présents dans le
-	//ficher
 	vector<string> * lireFichierMotsCles ( char * nomFichier );
+	// Mode d'emploi :
+	//	Lit le fichier nomFichier et retourne les mots-clés présents dans le
+	//	fichier.
+	//
+	// Contrat :
+	//	Aucun
 
-	//Lit un fichier quelconque et en discerne les identificateurs pour pouvoir
-	//les traiter
 	void lireFichier ( const char * nomFichier );
+	// Mode d'emploi :
+	//	Lit un fichier quelconque et en discerne les identificateurs pour
+	//	pouvoir les traiter
+	//
+	// Contrat :
+	//	Aucun
 
-	//Ajoute le mot en fonction de la variable exclureMotsCles
 	void traiterMot ( string &mot, const char * nomFichier, int numLigne );
+	// Mode d'emploi :
+	//	Ajoute le mot ou non en fonction de la valeur de
+	//	exclureMotsCles.
+	//
+	// Contrat :
+	//	Aucun
 
-	//ajoute le mot comme identificateur si il n'a pas déjç était ajouté et
-	//le nom de fichier et le numéro de ligne.
 	void ajouterReference ( string &mot, const char * nomFichier, int numLigne );
+	// Mode d'emploi :
+	//	Ajoute le mot comme identificateur si il n'a pas déjà
+	//	été ajouté et le nom de fichier et le numéro de ligne.
+	//
+	// Contrat :
+	//	Aucun
 
 
 	//----------------------------------------------------- Attributs protégés
 
-	// references possède comme clés les identificateurs retenus et pointent vers
-	// un de la classe AssocRefFichier
 	map<string, AssocRefFichier> references;
+	// references possède comme clés les identificateurs retenus et pointent vers
+	// une instance de la classe AssocRefFichier
 
-	// motsCles est un tableau dynamique de mots-clés
 	vector<string> * motsCles;
+	// Tableau dynamique de mots-clés
 
-	// exclureMotsCles est un booléen qui précise si on veut connaitre
-	// les idenctificateurs présents dans les mots-clés ou les autres.
+
 	bool exclureMotsCles;
+	// Précise si on veut retenir uniquemehnt les mots-clés ou tous les
+	// identificateurs sauf les mots-clés.
 };
 
 //--------------------------- Autres définitions dépendantes de <References>
