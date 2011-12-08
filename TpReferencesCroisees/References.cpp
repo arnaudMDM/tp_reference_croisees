@@ -149,6 +149,8 @@ vector<string> * References::lireFichierMotsCles ( char * nomFichier )
 			lecture.get ( );
 		}
 
+		// La fonction find() renvoie la constante npos si la chaîne n'est pas
+		// trouvée
 		if ( str.find ( ' ' ) == string::npos
 		        || str.find ( ',' ) == string::npos
 		        || str.find ( ';' ) == string::npos
