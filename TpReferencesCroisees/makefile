@@ -18,11 +18,11 @@ $(EXE): $(OBJ)
 clean:
 	$(RM) $(RMFLAGS) $(EXE) $(OBJ)
 
-Main.o: References.h
-	
 References.o: References.h AssocRefFichier.h
 
 AssocRefFichier.o: AssocRefFichier.h
+
+Main.o: References.h
 
 %.o: %.cpp
 	$(CC) $(CCFLAGS) -c $<
