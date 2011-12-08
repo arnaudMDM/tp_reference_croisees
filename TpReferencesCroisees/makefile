@@ -1,13 +1,13 @@
 CC=g++
 EDL=g++
-RM=del
+RM=rm
 
 CCFLAGS=-Wall
 LDFLAGS=
-RMFLAGS=
+RMFLAGS=-f
 LIBS=
 
-EXE=TpReferencesCroisees.exe
+EXE=TP_STL.exe
 INTERFACE=AssocRefFichier.h References.h
 REALISATION=$(INTERFACE:.h=.cpp) Main.cpp
 OBJ=$(REALISATION:.cpp=.o)
@@ -17,7 +17,7 @@ $(EXE): $(OBJ)
 
 clean:
 	$(RM) $(RMFLAGS) $(EXE) $(OBJ)
-
+	
 References.o: References.h AssocRefFichier.h
 
 AssocRefFichier.o: AssocRefFichier.h
