@@ -1,5 +1,0 @@
-On ne doit pas autoriser d'écrire des options où l'on veut. Sinon on fait erreur.
-Vérifier que si on -k, on a bien un nom juste après et non pas une option.
-Directives de pré-processeur
-Plusieurs fois un mot sur une même ligne
-si un des fichiers à analyser est présent plusieurs fois, on ne le traite qu'une seule fois.

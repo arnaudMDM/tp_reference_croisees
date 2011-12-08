@@ -1,4 +1,0 @@
-Quand on a deux fichiers identiques à analyser, il n'affiche qu'une fois le nom du fichier mais deux fois le numéro des lignes correspondantes
-
-Il faudrait essyayer de ne faire afficher que le nom du fichier et non l'adresse complète.
-Il faudrait aussi permettre à l'utilisateur de taper simplment le nom du fichier si il est dans le dossier.
